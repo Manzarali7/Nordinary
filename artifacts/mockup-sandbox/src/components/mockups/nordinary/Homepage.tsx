@@ -19,11 +19,11 @@ function GlowCard({
     <div
       className={`relative overflow-hidden rounded-2xl ${className}`}
       style={{
-        background: "rgba(10, 8, 3, 0.42)",
+        background: "rgba(16, 11, 3, 0.52)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
         border: "1px solid rgba(255,255,255,0.11)",
-        boxShadow: `0 12px 48px rgba(0,0,0,0.6)`,
+        boxShadow: `0 12px 48px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,220,100,0.04)`,
       }}
     >
       {/* ── TOP STROKE: fades in from left, peaks in center, fades out to right ── */}
@@ -100,19 +100,21 @@ function Badge({ children }: { children: React.ReactNode }) {
     <span
       className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
       style={{
-        background: "rgba(245,158,11,0.1)",
-        border: "1px solid rgba(245,158,11,0.25)",
-        color: AMBER,
+        background: "linear-gradient(135deg, rgba(245,158,11,0.14) 0%, rgba(245,158,11,0.07) 100%)",
+        border: "1px solid rgba(245,158,11,0.32)",
+        color: AMBER_LIGHT,
+        boxShadow: "0 0 20px rgba(245,158,11,0.12), inset 0 1px 0 rgba(255,235,120,0.15)",
+        letterSpacing: "0.12em",
       }}
     >
       <span
         style={{
-          width: 6,
-          height: 6,
+          width: 5,
+          height: 5,
           borderRadius: "50%",
-          background: AMBER,
+          background: `radial-gradient(circle, ${AMBER_LIGHT}, ${AMBER})`,
           display: "inline-block",
-          boxShadow: `0 0 6px ${AMBER}`,
+          boxShadow: `0 0 8px ${AMBER}, 0 0 16px rgba(245,158,11,0.5)`,
         }}
       />
       {children}
@@ -169,7 +171,7 @@ function ScrollMarquee() {
               key={i}
               className="flex items-center text-sm font-bold uppercase tracking-widest"
               style={{
-                color: "rgba(255,255,255,0.45)",
+                color: "rgba(255,228,188,0.47)",
                 paddingLeft: 48,
                 paddingRight: 48,
               }}
@@ -373,9 +375,27 @@ export function Homepage() {
           transform: translateY(-2px);
         }
 
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+
+        .btn-primary {
+          background-size: 200% auto;
+        }
+
         .section-divider {
           height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(245,158,11,0.2) 30%, rgba(245,158,11,0.2) 70%, transparent);
+          background: linear-gradient(90deg, transparent, rgba(245,158,11,0.15) 10%, rgba(245,158,11,0.38) 35%, rgba(252,211,77,0.5) 50%, rgba(245,158,11,0.38) 65%, rgba(245,158,11,0.15) 90%, transparent);
+          position: relative;
+        }
+        .section-divider::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: inherit;
+          filter: blur(4px);
+          opacity: 0.5;
         }
 
         ::-webkit-scrollbar { width: 4px; }
@@ -403,7 +423,7 @@ export function Homepage() {
           </span>
           <span
             className="text-xs font-medium uppercase tracking-widest ml-1"
-            style={{ color: "rgba(255,255,255,0.35)" }}
+            style={{ color: "rgba(255,228,188,0.38)" }}
           >
             studios
           </span>
@@ -414,9 +434,9 @@ export function Homepage() {
               key={item}
               href="#"
               className="text-sm font-medium transition-colors"
-              style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}
+              style={{ color: "rgba(255,228,188,0.6)", textDecoration: "none" }}
               onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#fff")}
-              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.55)")}
+              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,228,188,0.6)")}
             >
               {item}
             </a>
@@ -435,7 +455,7 @@ export function Homepage() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse 70% 55% at 50% 60%, rgba(245,158,11,0.06) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse 70% 55% at 50% 60%, rgba(245,158,11,0.11) 0%, transparent 70%)",
           }}
         />
         {/* Dome light — bottom center of hero */}
@@ -486,7 +506,7 @@ export function Homepage() {
 
           <p
             className="mt-8 max-w-2xl mx-auto leading-relaxed text-lg"
-            style={{ color: "rgba(255,255,255,0.55)" }}
+            style={{ color: "rgba(255,228,188,0.6)" }}
           >
             Individuelle Content-Strategien, die Kreativität und messbare Ergebnisse verbinden.
             Von smarten Marketingstrategien über professionellen Content bis hin zu maßgeschneidertem
@@ -520,7 +540,7 @@ export function Homepage() {
                 >
                   {stat.value}
                 </div>
-                <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.4)" }}>
+                <div className="text-xs mt-1" style={{ color: "rgba(255,228,188,0.42)" }}>
                   {stat.label}
                 </div>
               </div>
@@ -549,8 +569,14 @@ export function Homepage() {
       <ScrollMarquee />
 
       {/* ── SERVICES ── */}
-      <section className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-28 px-6 relative overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(245,158,11,0.07) 0%, transparent 70%)",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <Badge>Leistungen</Badge>
             <h2
@@ -573,7 +599,7 @@ export function Homepage() {
             </h2>
             <p
               className="mt-4 max-w-xl mx-auto leading-relaxed"
-              style={{ color: "rgba(255,255,255,0.5)" }}
+              style={{ color: "rgba(255,228,188,0.52)" }}
             >
               Ob du dein Markenimage stärken, neue Kunden gewinnen oder bestehende
               Zielgruppen begeistern möchtest – wir begleiten dich zum Erfolg.
@@ -632,7 +658,7 @@ export function Homepage() {
                 >
                   {service.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,228,188,0.47)" }}>
                   {service.desc}
                 </p>
                 <div className="mt-6 flex items-center gap-2 text-sm font-semibold" style={{ color: AMBER }}>
@@ -801,7 +827,7 @@ export function Homepage() {
                       </h3>
                       <ul className="space-y-2">
                         {step.items.map((item, j) => (
-                          <li key={j} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                          <li key={j} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,228,188,0.6)" }}>
                             <span style={{ color: AMBER, marginTop: 2, flexShrink: 0 }}>✦</span>
                             {item}
                           </li>
@@ -851,7 +877,7 @@ export function Homepage() {
                       </h3>
                       <ul className="space-y-2">
                         {step.items.map((item, j) => (
-                          <li key={j} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                          <li key={j} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,228,188,0.6)" }}>
                             <span style={{ color: AMBER, marginTop: 2, flexShrink: 0 }}>✦</span>
                             {item}
                           </li>
@@ -870,6 +896,13 @@ export function Homepage() {
 
       {/* ── PAIN POINTS ── */}
       <section className="py-28 px-6 relative overflow-hidden">
+        {/* Amber ambient glow — center */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 80% 50% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 70%)",
+          }}
+        />
         {/* Gold streaks — top of section, low opacity */}
         <img
           src="/__mockup/gold-streaks.png"
@@ -895,8 +928,9 @@ export function Homepage() {
         />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
+            <Badge>Herausforderungen</Badge>
             <h2
-              className="font-black"
+              className="mt-6 font-black"
               style={{
                 fontSize: "clamp(28px, 3.5vw, 46px)",
                 letterSpacing: "-0.03em",
@@ -946,7 +980,7 @@ export function Homepage() {
                 >
                   {item.q}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.4)" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,228,188,0.42)" }}>
                   {item.a}
                 </p>
               </GlowCard>
@@ -1027,7 +1061,7 @@ export function Homepage() {
                 >
                   {item.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,228,188,0.47)" }}>
                   {item.desc}
                 </p>
               </GlowCard>
@@ -1068,7 +1102,7 @@ export function Homepage() {
             </h2>
             <p
               className="mt-6 leading-relaxed"
-              style={{ color: "rgba(255,255,255,0.5)", fontSize: 16 }}
+              style={{ color: "rgba(255,228,188,0.52)", fontSize: 16 }}
             >
               Wir haben unzählige Kampagnen konzipiert und umgesetzt, die nicht nur Reichweite
               generierten, sondern echte Verbindungen geschafft haben. Von kreativen
@@ -1100,7 +1134,7 @@ export function Homepage() {
                 </div>
                 <div
                   className="text-xs leading-snug"
-                  style={{ color: "rgba(255,255,255,0.4)" }}
+                  style={{ color: "rgba(255,228,188,0.42)" }}
                 >
                   {stat.label}
                 </div>
@@ -1251,7 +1285,7 @@ export function Homepage() {
             </h2>
             <p
               className="mt-5 leading-relaxed max-w-2xl mx-auto"
-              style={{ color: "rgba(255,255,255,0.5)", fontSize: 17 }}
+              style={{ color: "rgba(255,228,188,0.52)", fontSize: 17 }}
             >
               Jeder Tag ohne professionelle Social-Media-Inhalte{" "}
               <strong style={{ color: "rgba(255,255,255,0.8)" }}>
@@ -1311,7 +1345,7 @@ export function Homepage() {
             </h2>
             <p
               className="mt-4 max-w-xl mx-auto"
-              style={{ color: "rgba(255,255,255,0.45)", fontSize: 16 }}
+              style={{ color: "rgba(255,228,188,0.47)", fontSize: 16 }}
             >
               Mit datengetriebenen Strategien holen wir gemeinsam das Maximum aus jedem Euro heraus.
             </p>
@@ -1470,7 +1504,7 @@ export function Homepage() {
                 </div>
                 <p
                   className="text-sm leading-relaxed mb-6"
-                  style={{ color: "rgba(255,255,255,0.55)" }}
+                  style={{ color: "rgba(255,228,188,0.6)" }}
                 >
                   „{t.text}"
                 </p>
@@ -1493,7 +1527,7 @@ export function Homepage() {
                     <div className="text-sm font-bold" style={{ color: "#fff" }}>
                       {t.name}
                     </div>
-                    <div className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
+                    <div className="text-xs" style={{ color: "rgba(255,228,188,0.38)" }}>
                       {t.role}
                     </div>
                   </div>
@@ -1528,7 +1562,7 @@ export function Homepage() {
             </div>
             <p
               className="text-sm leading-relaxed max-w-xs"
-              style={{ color: "rgba(255,255,255,0.35)" }}
+              style={{ color: "rgba(255,228,188,0.38)" }}
             >
               Deine Social Media Agentur in Wien. Kreativität und messbare Ergebnisse,
               die deine Marke nachhaltig sichtbar machen.
@@ -1548,9 +1582,9 @@ export function Homepage() {
                   <a
                     href="#"
                     className="text-sm"
-                    style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}
+                    style={{ color: "rgba(255,228,188,0.42)", textDecoration: "none" }}
                     onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#fff")}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.4)")}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,228,188,0.42)")}
                   >
                     {l}
                   </a>
@@ -1572,9 +1606,9 @@ export function Homepage() {
                   <a
                     href="#"
                     className="text-sm"
-                    style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}
+                    style={{ color: "rgba(255,228,188,0.42)", textDecoration: "none" }}
                     onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#fff")}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.4)")}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,228,188,0.42)")}
                   >
                     {l}
                   </a>
