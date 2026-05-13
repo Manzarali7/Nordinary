@@ -1194,19 +1194,24 @@ export function Homepage() {
 
       {/* ── PRICING ── */}
       <section className="py-28 px-6 relative overflow-hidden">
-        {/* Gold particles background — fades on left, right, top and bottom */}
+        {/* Gold particles — small, right side only */}
         <img
           src="/__mockup/gold-particles.jpeg"
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 w-full h-full object-cover select-none"
+          className="pointer-events-none absolute select-none"
           style={{
-            opacity: 0.18,
+            right: 0,
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: 260,
+            height: 260,
+            objectFit: "cover",
+            objectPosition: "right center",
+            opacity: 0.22,
             maskImage:
-              "linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
-            maskComposite: "intersect",
+              "radial-gradient(ellipse 80% 80% at 80% 50%, black 0%, transparent 100%)",
             WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
-            WebkitMaskComposite: "source-in",
+              "radial-gradient(ellipse 80% 80% at 80% 50%, black 0%, transparent 100%)",
             mixBlendMode: "screen",
           }}
         />
