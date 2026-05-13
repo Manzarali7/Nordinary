@@ -10,83 +10,104 @@ function GlowCard({
   children,
   className = "",
   intensity = 1,
+  corner = "tl",
 }: {
   children: React.ReactNode;
   className?: string;
   intensity?: number;
+  corner?: "tl" | "tr" | "bl" | "br";
 }) {
+  const isTop    = corner === "tl" || corner === "tr";
+  const isLeft   = corner === "tl" || corner === "bl";
+  const spotSize = 340 * intensity;
+
+  const spotPos: React.CSSProperties = isTop
+    ? (isLeft ? { top: -55, left: -55 }  : { top: -55, right: -55 })
+    : (isLeft ? { bottom: -55, left: -55 } : { bottom: -55, right: -55 });
+
+  const hEdgePos: React.CSSProperties = isLeft
+    ? { left: 0, width: "55%" }
+    : { right: 0, width: "55%" };
+  const hEdgeGrad = isLeft ? "to right" : "to left";
+  const hEdgeVPos: React.CSSProperties = isTop ? { top: 0 } : { bottom: 0 };
+
+  const vEdgePos: React.CSSProperties = isLeft
+    ? { left: 0 }
+    : { right: 0 };
+  const vEdgeGrad = isTop ? "to bottom" : "to top";
+  const vEdgeHPos: React.CSSProperties = isTop ? { top: 0 } : { bottom: 0 };
+
+  const pixelPos: React.CSSProperties = isTop
+    ? (isLeft ? { top: 0, left: 0 }   : { top: 0, right: 0 })
+    : (isLeft ? { bottom: 0, left: 0 } : { bottom: 0, right: 0 });
+
   return (
     <div
       className={`relative overflow-hidden rounded-2xl ${className}`}
       style={{
-        background: "rgba(16, 11, 3, 0.52)",
+        background: "rgba(7, 5, 2, 0.88)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
-        border: "1px solid rgba(255,255,255,0.11)",
-        boxShadow: `0 12px 48px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,220,100,0.04)`,
+        border: "1px solid rgba(255,255,255,0.10)",
+        boxShadow: "0 8px 40px rgba(0,0,0,0.7)",
       }}
     >
-      {/* ── TOP STROKE: fades in from left, peaks in center, fades out to right ── */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-20"
-        style={{
-          height: 2,
-          background: `linear-gradient(90deg,
-            transparent 0%,
-            transparent 8%,
-            rgba(245,158,11,${0.45 * intensity}) 22%,
-            rgba(252,211,77,${0.95 * intensity}) 42%,
-            rgba(255,235,120,${1 * intensity}) 50%,
-            rgba(252,211,77,${0.95 * intensity}) 58%,
-            rgba(245,158,11,${0.45 * intensity}) 78%,
-            transparent 92%,
-            transparent 100%)`,
-          borderRadius: "2px 2px 0 0",
-        }}
-      />
-      {/* ── BOTTOM-RIGHT GLOW: large warm amber fill like reference ── */}
+      {/* ── CORNER SPOTLIGHT ── */}
       <div
         className="pointer-events-none absolute z-10"
         style={{
-          right: -40,
-          bottom: -40,
-          width: 280 * intensity,
-          height: 280 * intensity,
-          background: `radial-gradient(circle at 65% 65%,
-            rgba(255,180,30,${0.72 * intensity}) 0%,
-            rgba(230,140,10,${0.55 * intensity}) 18%,
-            rgba(200,110,0,${0.35 * intensity}) 36%,
-            rgba(160,80,0,${0.15 * intensity}) 58%,
-            transparent 76%)`,
-          filter: "blur(28px)",
+          ...spotPos,
+          width: spotSize,
+          height: spotSize,
+          background: `radial-gradient(circle at center,
+            rgba(255,210,60,${0.5 * intensity}) 0%,
+            rgba(245,158,11,${0.36 * intensity}) 22%,
+            rgba(200,100,5,${0.16 * intensity}) 48%,
+            transparent 70%)`,
+          filter: `blur(${34 * intensity}px)`,
           borderRadius: "50%",
         }}
       />
 
-      {/* ── BOTTOM STROKE: same as top but lower opacity ── */}
+      {/* ── HORIZONTAL EDGE LINE ── */}
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-20"
+        className="pointer-events-none absolute z-20"
         style={{
-          height: 2,
-          background: `linear-gradient(90deg,
-            transparent 0%,
-            transparent 8%,
-            rgba(245,158,11,${0.07 * intensity}) 22%,
-            rgba(252,211,77,${0.14 * intensity}) 42%,
-            rgba(255,235,120,${0.16 * intensity}) 50%,
-            rgba(252,211,77,${0.14 * intensity}) 58%,
-            rgba(245,158,11,${0.07 * intensity}) 78%,
-            transparent 92%,
+          ...hEdgeVPos,
+          ...hEdgePos,
+          height: 1,
+          background: `linear-gradient(${hEdgeGrad},
+            rgba(255,240,130,${0.95 * intensity}) 0%,
+            rgba(245,158,11,${0.45 * intensity}) 30%,
             transparent 100%)`,
-          borderRadius: "0 0 2px 2px",
         }}
       />
 
-      {/* Card inner border for glassy depth */}
+      {/* ── VERTICAL EDGE LINE ── */}
       <div
-        className="pointer-events-none absolute inset-0 rounded-2xl z-20"
+        className="pointer-events-none absolute z-20"
         style={{
-          border: "1px solid rgba(255,255,255,0.07)",
+          ...vEdgeHPos,
+          ...vEdgePos,
+          width: 1,
+          height: "55%",
+          background: `linear-gradient(${vEdgeGrad},
+            rgba(255,240,130,${0.95 * intensity}) 0%,
+            rgba(245,158,11,${0.45 * intensity}) 30%,
+            transparent 100%)`,
+        }}
+      />
+
+      {/* ── CORNER PINPOINT ── */}
+      <div
+        className="pointer-events-none absolute z-20"
+        style={{
+          ...pixelPos,
+          width: 4,
+          height: 4,
+          background: `rgba(255,250,180,${intensity})`,
+          borderRadius: "50%",
+          boxShadow: `0 0 6px rgba(255,240,100,${intensity}), 0 0 16px rgba(245,158,11,${0.85 * intensity})`,
         }}
       />
 
@@ -633,7 +654,7 @@ export function Homepage() {
                 tag: "Web",
               },
             ].map((service, i) => (
-              <GlowCard key={i} className="p-8" intensity={1.2}>
+              <GlowCard key={i} className="p-8" intensity={1.2} corner={(["tl","tr","bl","br"] as const)[i]}>
                 <div className="flex items-start justify-between mb-6">
                   <span
                     className="text-4xl"
