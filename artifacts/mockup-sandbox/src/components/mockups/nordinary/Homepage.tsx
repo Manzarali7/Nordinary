@@ -61,6 +61,25 @@ function GlowCard({
         }}
       />
 
+      {/* ── BOTTOM STROKE: same as top but lower opacity ── */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-20"
+        style={{
+          height: 2,
+          background: `linear-gradient(90deg,
+            transparent 0%,
+            transparent 8%,
+            rgba(245,158,11,${0.18 * intensity}) 22%,
+            rgba(252,211,77,${0.38 * intensity}) 42%,
+            rgba(255,235,120,${0.42 * intensity}) 50%,
+            rgba(252,211,77,${0.38 * intensity}) 58%,
+            rgba(245,158,11,${0.18 * intensity}) 78%,
+            transparent 92%,
+            transparent 100%)`,
+          borderRadius: "0 0 2px 2px",
+        }}
+      />
+
       {/* Card inner border for glassy depth */}
       <div
         className="pointer-events-none absolute inset-0 rounded-2xl z-20"
