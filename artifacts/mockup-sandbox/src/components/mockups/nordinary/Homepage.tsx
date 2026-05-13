@@ -616,15 +616,15 @@ export function Homepage() {
       <section className="relative py-28 overflow-hidden">
         {/* Right amber glow — natural aspect ratio, fades left + top + bottom */}
         <img
-          src="/__mockup/amber-glow2.png"
+          src="/__mockup/gold-particles.jpeg"
           aria-hidden="true"
           className="pointer-events-none absolute select-none"
           style={{
             right: 0,
             top: "50%",
             transform: "translateY(-50%)",
-            width: 240,
-            height: "auto",
+            width: 340,
+            height: 340,
             opacity: 0.7,
             maskImage: [
               "linear-gradient(to left,   black 0%, black 35%, transparent 100%)",
