@@ -42,22 +42,38 @@ function GlowCard({
           borderRadius: "2px 2px 0 0",
         }}
       />
-      {/* ── BOTTOM-RIGHT GLOW: contained, bright center → amber → transparent ── */}
+      {/* ── BOTTOM-RIGHT GLOW: tall flame bleeding in from the corner edge ── */}
+      {/* Primary hot spot — bright at corner, fades inward */}
       <div
         className="pointer-events-none absolute z-10"
         style={{
-          right: -10,
-          bottom: -10,
-          width: 160 * intensity,
-          height: 160 * intensity,
-          background: `radial-gradient(circle at 78% 78%,
-            rgba(255,248,200,${0.9 * intensity}) 0%,
-            rgba(255,210,40,${0.7 * intensity}) 10%,
-            rgba(245,158,11,${0.45 * intensity}) 28%,
-            rgba(180,100,0,${0.15 * intensity}) 55%,
-            transparent 75%)`,
-          filter: "blur(38px)",
-          borderRadius: "50%",
+          right: 0,
+          bottom: 0,
+          width: 180 * intensity,
+          height: 320 * intensity,
+          background: `radial-gradient(ellipse at 100% 100%,
+            rgba(255,252,180,${0.95 * intensity}) 0%,
+            rgba(255,220,40,${0.85 * intensity}) 6%,
+            rgba(245,158,11,${0.65 * intensity}) 18%,
+            rgba(200,110,0,${0.35 * intensity}) 38%,
+            rgba(140,70,0,${0.12 * intensity}) 60%,
+            transparent 78%)`,
+          filter: "blur(32px)",
+        }}
+      />
+      {/* Wide ambient spread going up the right side */}
+      <div
+        className="pointer-events-none absolute z-10"
+        style={{
+          right: 0,
+          bottom: 0,
+          width: 100 * intensity,
+          height: 240 * intensity,
+          background: `radial-gradient(ellipse at 100% 95%,
+            rgba(245,158,11,${0.4 * intensity}) 0%,
+            rgba(200,100,0,${0.18 * intensity}) 40%,
+            transparent 70%)`,
+          filter: "blur(50px)",
         }}
       />
 
