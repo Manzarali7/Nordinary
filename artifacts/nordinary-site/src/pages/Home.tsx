@@ -27,6 +27,7 @@ function GlowCard({
         boxShadow: `0 12px 48px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,220,100,0.04)`,
       }}
     >
+      {/* ── TOP STROKE: fades in from left, peaks in center, fades out to right ── */}
       <div
         className="pointer-events-none absolute inset-x-0 top-0 z-20"
         style={{
@@ -44,6 +45,7 @@ function GlowCard({
           borderRadius: "2px 2px 0 0",
         }}
       />
+      {/* ── BOTTOM-RIGHT GLOW blob ── */}
       <div
         className="pointer-events-none absolute z-10"
         style={{
@@ -61,6 +63,7 @@ function GlowCard({
           borderRadius: "50%",
         }}
       />
+      {/* ── BOTTOM STROKE ── */}
       <div
         className="pointer-events-none absolute inset-x-0 bottom-0 z-20"
         style={{
@@ -78,6 +81,7 @@ function GlowCard({
           borderRadius: "0 0 2px 2px",
         }}
       />
+      {/* ── INNER BORDER ── */}
       <div
         className="pointer-events-none absolute inset-0 rounded-2xl z-20"
         style={{ border: "1px solid rgba(255,255,255,0.07)" }}
@@ -313,6 +317,7 @@ function ApertureLightLeak({
       className={`pointer-events-none absolute ${className}`}
       style={{ width: size, height: size }}
     >
+      {/* Radiating rays */}
       {Array.from({ length: rayCount }).map((_, i) => (
         <div
           key={i}
@@ -332,6 +337,7 @@ function ApertureLightLeak({
           }}
         />
       ))}
+      {/* Thin cross beams */}
       {[0, 90].map((angle) => (
         <div
           key={angle}
@@ -350,6 +356,7 @@ function ApertureLightLeak({
           }}
         />
       ))}
+      {/* Bright center spot */}
       <div
         style={{
           position: "absolute",
@@ -390,6 +397,7 @@ export default function Home() {
         background: "#080808",
         color: "#fff",
         fontFamily: "'Inter', 'Segoe UI', sans-serif",
+        minHeight: "100vh",
         height: "100vh",
       }}
     >
@@ -496,7 +504,7 @@ export default function Home() {
             className="text-xs font-medium uppercase tracking-widest ml-1"
             style={{ color: "rgba(255,228,188,0.38)" }}
           >
-            STUDIOS
+            studios
           </span>
         </div>
         <div className="hidden md:flex items-center gap-8">
@@ -522,23 +530,27 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-32 text-center overflow-hidden">
+        {/* Background glows */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: "radial-gradient(ellipse 70% 55% at 50% 60%, rgba(245,158,11,0.11) 0%, transparent 70%)",
           }}
         />
+        {/* Dome light — bottom center of hero */}
         <DomeLightLeak
           opacity={0.55}
           size={560}
           className="bottom-0 left-1/2 -translate-x-1/2"
         />
+        {/* Aperture — top-left corner */}
         <ApertureLightLeak
           opacity={0.28}
           size={260}
           rayCount={10}
           className="-top-8 -left-8"
         />
+        {/* Aperture — right side mid */}
         <ApertureLightLeak
           opacity={0.18}
           size={200}
@@ -589,6 +601,7 @@ export default function Home() {
             </button>
           </div>
 
+          {/* Floating stats */}
           <div className="mt-16 grid grid-cols-3 gap-6 max-w-lg mx-auto">
             {[
               { value: "50+", label: "Unternehmen" },
@@ -614,6 +627,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Scroll indicator */}
         <div
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40"
         >
@@ -675,35 +689,47 @@ export default function Home() {
             {[
               {
                 title: "Social-Media Management",
-                desc: "Vollständige Betreuung deiner Kanäle – von der Strategie bis zur Umsetzung. Wir sorgen für konsistente Präsenz, Community-Pflege und messbares Wachstum.",
-                icon: "📱",
-                tags: ["Instagram", "TikTok", "LinkedIn"],
+                desc: "Strategische Betreuung deiner Social-Media-Kanäle mit maßgeschneiderten Inhalten und datenbasierter Optimierung.",
+                icon: "◈",
+                tag: "Management",
               },
               {
                 title: "Content Produktion",
-                desc: "Hochwertige Foto- und Videoproduktionen, die deine Marke zum Leben erwecken. Von der Konzeption bis zum fertigen Content – alles aus einer Hand.",
-                icon: "🎬",
-                tags: ["Video", "Fotografie", "Reels"],
+                desc: "Professionelle Foto- und Videoproduktion, die deine Marke visuell auf das nächste Level bringt.",
+                icon: "◉",
+                tag: "Produktion",
               },
               {
                 title: "Performance Marketing",
-                desc: "Datengetriebene Werbekampagnen mit maximaler Reichweite und messbarem ROI. Paid Social, Targeting-Optimierung und kontinuierliches Reporting.",
-                icon: "📈",
-                tags: ["Meta Ads", "TikTok Ads", "ROI"],
+                desc: "Zielgenaue Paid-Ad-Kampagnen auf Meta, Google & Co. mit messbarem ROI und laufender Optimierung.",
+                icon: "◐",
+                tag: "Paid Ads",
               },
               {
-                title: "Webdesign & Branding",
-                desc: "Professionelle Webauftritte und Markenidentitäten, die Vertrauen schaffen und konvertieren. Von der Markenanalyse bis zum fertigen Onlineauftritt.",
-                icon: "✨",
-                tags: ["Webdesign", "Branding", "UX"],
+                title: "Webdesign",
+                desc: "Individuelle Websites und Shops, die konvertieren – mit modernem Design und technischer Exzellenz.",
+                icon: "◑",
+                tag: "Web",
               },
             ].map((service, i) => (
-              <GlowCard key={i} className="p-8" intensity={1}>
-                <div
-                  className="text-3xl mb-5 w-14 h-14 flex items-center justify-center rounded-2xl"
-                  style={{ background: "rgba(245,158,11,0.08)" }}
-                >
-                  {service.icon}
+              <GlowCard key={i} className="p-8" intensity={1.2}>
+                <div className="flex items-start justify-between mb-6">
+                  <span
+                    className="text-4xl"
+                    style={{ color: AMBER, opacity: 0.8 }}
+                  >
+                    {service.icon}
+                  </span>
+                  <span
+                    className="text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full"
+                    style={{
+                      background: "rgba(245,158,11,0.08)",
+                      color: "rgba(245,158,11,0.7)",
+                      border: "1px solid rgba(245,158,11,0.15)",
+                    }}
+                  >
+                    {service.tag}
+                  </span>
                 </div>
                 <h3
                   className="text-xl font-bold mb-3"
@@ -711,23 +737,12 @@ export default function Home() {
                 >
                   {service.title}
                 </h3>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,228,188,0.47)" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,228,188,0.47)" }}>
                   {service.desc}
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {service.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-3 py-1 rounded-full"
-                      style={{
-                        background: "rgba(245,158,11,0.08)",
-                        border: "1px solid rgba(245,158,11,0.18)",
-                        color: "rgba(252,211,77,0.7)",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div className="mt-6 flex items-center gap-2 text-sm font-semibold" style={{ color: AMBER }}>
+                  Mehr erfahren
+                  <span>→</span>
                 </div>
               </GlowCard>
             ))}
@@ -735,59 +750,48 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="section-divider mx-16" />
-
-      {/* ── PROCESS ── */}
-      <section className="py-28 px-6 relative overflow-hidden">
+      {/* ── LEISTUNGEN TIMELINE ── */}
+      <section className="relative py-28 overflow-hidden">
+        {/* Right amber glow — natural aspect ratio, fades left + top + bottom */}
         <img
           src={`${BASE}gold-particles.jpeg`}
           aria-hidden="true"
           className="pointer-events-none absolute select-none"
           style={{
             left: 0,
-            top: "10%",
-            width: 480,
-            height: 480,
+            top: 80,
+            width: 340,
+            height: 340,
             objectFit: "cover",
-            objectPosition: "left center",
-            opacity: 0.18,
+            objectPosition: "right center",
+            opacity: 0.28,
             maskImage: [
-              "radial-gradient(ellipse 70% 80% at 10% 50%, black 0%, transparent 100%)",
+              "linear-gradient(to right,  black 0%, black 35%, transparent 100%)",
+              "linear-gradient(to bottom, black 0%, black 65%, transparent 100%)",
+              "linear-gradient(to top,    black 0%, black 65%, transparent 100%)",
             ].join(", "),
             WebkitMaskImage: [
-              "radial-gradient(ellipse 70% 80% at 10% 50%, black 0%, transparent 100%)",
+              "linear-gradient(to right,  black 0%, black 35%, transparent 100%)",
+              "linear-gradient(to bottom, black 0%, black 65%, transparent 100%)",
+              "linear-gradient(to top,    black 0%, black 65%, transparent 100%)",
             ].join(", "),
+            maskComposite: "intersect",
+            WebkitMaskComposite: "source-in",
             mixBlendMode: "screen",
           }}
         />
-        <img
-          src={`${BASE}gold-streaks.png`}
-          aria-hidden="true"
-          className="pointer-events-none absolute select-none"
-          style={{
-            right: 0,
-            bottom: "5%",
-            width: 360,
-            height: 360,
-            objectFit: "cover",
-            objectPosition: "right bottom",
-            opacity: 0.14,
-            maskImage: "radial-gradient(ellipse 80% 80% at 90% 90%, black 0%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse 80% 80% at 90% 90%, black 0%, transparent 100%)",
-            mixBlendMode: "screen",
-          }}
-        />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <Badge>Unser Prozess</Badge>
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <Badge>Unsere Leistungen</Badge>
             <h2
               className="mt-6 font-black"
               style={{
-                fontSize: "clamp(32px, 4vw, 52px)",
+                fontSize: "clamp(30px, 4vw, 52px)",
                 letterSpacing: "-0.03em",
               }}
             >
-              So arbeiten wir{" "}
+              Im Detail –{" "}
               <span
                 style={{
                   background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER})`,
@@ -795,76 +799,207 @@ export default function Home() {
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                für dich
+                was wir für dich tun
               </span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-4 gap-5">
+          {/* Timeline */}
+          <div className="relative">
+            {/* Vertical line */}
+            <div
+              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0"
+              style={{
+                width: 1,
+                background: `linear-gradient(to bottom,
+                  transparent,
+                  rgba(245,158,11,0.25) 10%,
+                  rgba(245,158,11,0.25) 90%,
+                  transparent)`,
+              }}
+            />
+
             {[
               {
-                step: "01",
-                title: "Analyse",
-                desc: "Wir analysieren deine aktuelle Situation, Zielgruppe und Wettbewerber, um die beste Strategie zu entwickeln.",
+                num: "01",
+                title: "Social-Media Management",
+                tag: "Management",
+                items: [
+                  "Strategische Content-Planung & Redaktionskalender",
+                  "Professionelles Community Management",
+                  "Plattformbetreuung (Instagram, TikTok, LinkedIn)",
+                  "Monatliches Reporting & Performance-Analyse",
+                  "Laufende Strategie-Optimierung",
+                ],
+                left: false,
               },
               {
-                step: "02",
-                title: "Strategie",
-                desc: "Basierend auf der Analyse entwickeln wir eine maßgeschneiderte Content-Strategie mit klaren KPIs.",
+                num: "02",
+                title: "Content Produktion",
+                tag: "Produktion",
+                items: [
+                  "Professionelle Foto- & Videoproduktion vor Ort",
+                  "Reel- & Short-Form-Video-Erstellung",
+                  "Skript-Writing & kreative Konzeption",
+                  "Professioneller Videoschnitt & Motion Graphics",
+                  "Thumbnail- & Grafikdesign",
+                ],
+                left: true,
               },
               {
-                step: "03",
-                title: "Umsetzung",
-                desc: "Unser Team setzt die Strategie mit hochwertigem Content und präzisem Timing in die Tat um.",
+                num: "03",
+                title: "Performance Marketing",
+                tag: "Paid Ads",
+                items: [
+                  "Meta Ads (Facebook & Instagram Kampagnen)",
+                  "Google Ads & YouTube Werbung",
+                  "Zielgruppen-Analyse & Targeting",
+                  "A/B-Testing & Creatives-Optimierung",
+                  "Conversion-Tracking & ROI-Reporting",
+                ],
+                left: false,
               },
               {
-                step: "04",
-                title: "Optimierung",
-                desc: "Wir messen, analysieren und optimieren kontinuierlich, um maximale Ergebnisse zu erzielen.",
+                num: "04",
+                title: "Webdesign",
+                tag: "Web",
+                items: [
+                  "Individuelle Website-Konzeption & Design",
+                  "Shopify- & WooCommerce-Shops",
+                  "Mobile-First & responsives Design",
+                  "SEO-Grundoptimierung & Ladezeit-Tuning",
+                  "Laufende Wartung & technischer Support",
+                ],
+                left: true,
               },
             ].map((step, i) => (
-              <CornerGlowCard key={i} className="p-7" intensity={0.9} corner={["tl","tr","bl","br"][i] as "tl"|"tr"|"bl"|"br"}>
+              <div
+                key={i}
+                className="relative grid grid-cols-2 gap-8 mb-20 items-center"
+              >
+                {/* Number node on the center line */}
                 <div
-                  className="text-4xl font-black mb-4 opacity-20"
-                  style={{ color: AMBER, lineHeight: 1 }}
+                  className="absolute left-1/2 -translate-x-1/2 z-20 flex items-center justify-center rounded-full font-black text-sm"
+                  style={{
+                    width: 44,
+                    height: 44,
+                    background: `linear-gradient(135deg, ${AMBER}, ${AMBER_DARK})`,
+                    color: "#0a0700",
+                    boxShadow: `0 0 20px rgba(245,158,11,0.5), 0 0 40px rgba(245,158,11,0.2)`,
+                  }}
                 >
-                  {step.step}
+                  {step.num}
                 </div>
-                <h3
-                  className="text-base font-bold mb-3"
-                  style={{ color: "#fff" }}
-                >
-                  {step.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,228,188,0.42)" }}>
-                  {step.desc}
-                </p>
-              </CornerGlowCard>
+
+                {/* Left cell */}
+                <div className={step.left ? "" : "flex justify-end"}>
+                  {step.left ? (
+                    <CornerGlowCard className="p-7 w-full" intensity={1} corner="tr">
+                      <div
+                        className="text-xs font-bold uppercase tracking-widest mb-3"
+                        style={{ color: AMBER, opacity: 0.7 }}
+                      >
+                        {step.tag}
+                      </div>
+                      <h3 className="text-xl font-black mb-4" style={{ color: "#fff", letterSpacing: "-0.02em" }}>
+                        {step.title}
+                      </h3>
+                      <ul className="space-y-2">
+                        {step.items.map((item, j) => (
+                          <li key={j} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,228,188,0.6)" }}>
+                            <span style={{ color: AMBER, marginTop: 2, flexShrink: 0 }}>✦</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </CornerGlowCard>
+                  ) : (
+                    /* Decorative icon block */
+                    <div
+                      className="w-48 h-48 rounded-2xl flex items-center justify-center"
+                      style={{
+                        background: "rgba(245,158,11,0.04)",
+                        border: "1px solid rgba(245,158,11,0.1)",
+                      }}
+                    >
+                      <span style={{ fontSize: 72, opacity: 0.15 }}>
+                        {["◈", "◉", "◐", "◑"][i]}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right cell */}
+                <div className={step.left ? "flex justify-start" : ""}>
+                  {step.left ? (
+                    <div
+                      className="w-48 h-48 rounded-2xl flex items-center justify-center"
+                      style={{
+                        background: "rgba(245,158,11,0.04)",
+                        border: "1px solid rgba(245,158,11,0.1)",
+                      }}
+                    >
+                      <span style={{ fontSize: 72, opacity: 0.15 }}>
+                        {["◈", "◉", "◐", "◑"][i]}
+                      </span>
+                    </div>
+                  ) : (
+                    <CornerGlowCard className="p-7 w-full" intensity={1} corner="tl">
+                      <div
+                        className="text-xs font-bold uppercase tracking-widest mb-3"
+                        style={{ color: AMBER, opacity: 0.7 }}
+                      >
+                        {step.tag}
+                      </div>
+                      <h3 className="text-xl font-black mb-4" style={{ color: "#fff", letterSpacing: "-0.02em" }}>
+                        {step.title}
+                      </h3>
+                      <ul className="space-y-2">
+                        {step.items.map((item, j) => (
+                          <li key={j} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,228,188,0.6)" }}>
+                            <span style={{ color: AMBER, marginTop: 2, flexShrink: 0 }}>✦</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </CornerGlowCard>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
+      <div className="section-divider mx-16" />
+
       {/* ── PAIN POINTS ── */}
       <section className="py-28 px-6 relative overflow-hidden">
+        {/* Amber ambient glow — center */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 80% 50% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 70%)",
+          }}
+        />
+        {/* Gold streaks — top of section, low opacity */}
         <img
-          src={`${BASE}amber-glow.png`}
+          src={`${BASE}gold-streaks.png`}
           aria-hidden="true"
           className="pointer-events-none absolute select-none"
           style={{
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 900,
-            height: 900,
+            top: 0,
+            left: 0,
+            right: 0,
+            width: "100%",
+            height: 340,
             objectFit: "cover",
-            opacity: 0.07,
+            objectPosition: "center top",
+            opacity: 0.13,
             maskImage: [
-              "radial-gradient(ellipse 60% 60% at 50% 50%, black 0%, transparent 70%)",
               "linear-gradient(to bottom, transparent 0%, black 18%, black 45%, transparent 100%)",
             ].join(", "),
             WebkitMaskImage: [
-              "radial-gradient(ellipse 60% 60% at 50% 50%, black 0%, transparent 70%)",
               "linear-gradient(to bottom, transparent 0%, black 18%, black 45%, transparent 100%)",
             ].join(", "),
             mixBlendMode: "screen",
@@ -1018,7 +1153,9 @@ export default function Home() {
 
       {/* ── ABOUT ── */}
       <section className="py-28 px-6 relative overflow-hidden">
+        {/* Dome — bottom right of about section */}
         <DomeLightLeak opacity={0.35} size={480} className="bottom-0 right-0 translate-x-1/4" />
+        {/* Aperture — top left */}
         <ApertureLightLeak opacity={0.2} size={220} rayCount={10} className="-top-10 left-8" />
         <div className="max-w-6xl mx-auto grid grid-cols-2 gap-16 items-center relative z-10">
           <div>
@@ -1088,7 +1225,9 @@ export default function Home() {
 
       {/* ── REFERENCES ── */}
       <section className="py-28 px-6 relative overflow-hidden">
+        {/* Dome — bottom left */}
         <DomeLightLeak opacity={0.3} size={400} className="bottom-0 left-0 -translate-x-1/4" />
+        {/* Aperture — top right */}
         <ApertureLightLeak opacity={0.18} size={200} rayCount={10} className="-top-8 right-12" />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="mb-12">
@@ -1186,6 +1325,7 @@ export default function Home() {
             border: "1px solid rgba(255,255,255,0.11)",
           }}
         >
+          {/* Unicorn Studio WebGL scene fills the card background */}
           <div className="absolute inset-0 z-0">
             <UnicornScene
               projectId="UC9oKoDWjxF2spKEmVE1"
@@ -1194,12 +1334,14 @@ export default function Home() {
               height="100%"
             />
           </div>
+          {/* Dark overlay so text stays readable */}
           <div
             className="absolute inset-0 z-10 pointer-events-none"
             style={{
               background: "rgba(8,6,2,0.55)",
             }}
           />
+          {/* Content */}
           <div className="relative z-20 px-16 py-20">
             <Badge>Schreib' uns noch heute!</Badge>
             <h2
@@ -1239,6 +1381,7 @@ export default function Home() {
 
       {/* ── PRICING ── */}
       <section className="py-28 px-6 relative overflow-hidden">
+        {/* Gold particles — small, right side only */}
         <img
           src={`${BASE}gold-particles.jpeg`}
           aria-hidden="true"
@@ -1444,18 +1587,23 @@ export default function Home() {
                 >
                   „{t.text}"
                 </p>
+                <div
+                  className="h-px mb-5"
+                  style={{ background: "rgba(255,255,255,0.06)" }}
+                />
                 <div className="flex items-center gap-3">
                   <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-black"
                     style={{
-                      background: `linear-gradient(135deg, ${AMBER}, ${AMBER_DARK})`,
-                      color: "#0a0700",
+                      background: `linear-gradient(135deg, ${AMBER}33, ${AMBER}11)`,
+                      border: `1px solid ${AMBER}33`,
+                      color: AMBER,
                     }}
                   >
                     {t.name[0]}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold" style={{ color: "#fff" }}>
+                    <div className="text-sm font-bold" style={{ color: "#fff" }}>
                       {t.name}
                     </div>
                     <div className="text-xs" style={{ color: "rgba(255,228,188,0.38)" }}>
@@ -1469,199 +1617,97 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FAQ ── */}
-      <section className="py-28 px-6 relative overflow-hidden">
-        <img
-          src={`${BASE}amber-glow2.png`}
-          aria-hidden="true"
-          className="pointer-events-none absolute select-none"
-          style={{
-            right: "-5%",
-            top: "50%",
-            transform: "translateY(-50%)",
-            width: 600,
-            height: 600,
-            objectFit: "cover",
-            opacity: 0.09,
-            maskImage: "radial-gradient(ellipse 70% 70% at 80% 50%, black 0%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 80% 50%, black 0%, transparent 100%)",
-            mixBlendMode: "screen",
-          }}
-        />
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <Badge>FAQ</Badge>
-            <h2
-              className="mt-6 font-black"
-              style={{
-                fontSize: "clamp(28px, 3.5vw, 46px)",
-                letterSpacing: "-0.03em",
-              }}
-            >
-              Häufig gestellte{" "}
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Fragen
-              </span>
-            </h2>
-          </div>
-
-          <div className="space-y-3">
-            {[
-              {
-                q: "Wie läuft die Zusammenarbeit ab?",
-                a: "Wir starten mit einem kostenlosen Erstgespräch, analysieren deine Situation und entwickeln eine maßgeschneiderte Strategie. Nach deiner Freigabe beginnen wir sofort mit der Umsetzung.",
-              },
-              {
-                q: "Wie schnell sehe ich erste Ergebnisse?",
-                a: "Die ersten messbaren Ergebnisse siehst du typischerweise nach 4-8 Wochen. Langfristiges Wachstum und echte Community-Bindung entwickeln sich über 3-6 Monate.",
-              },
-              {
-                q: "Welche Branchen betreut ihr?",
-                a: "Wir arbeiten mit Unternehmen aus allen Branchen – von Dienstleistern und Shops bis hin zu Ärzten, Coaches und B2B-Unternehmen. Unsere Strategien passen wir individuell an.",
-              },
-              {
-                q: "Was ist im Paketpreis enthalten?",
-                a: "Strategie, Content-Erstellung, Planung, Posting, Community Management und monatliches Reporting sind standardmäßig enthalten. Paid Ads können optional hinzugebucht werden.",
-              },
-              {
-                q: "Kann ich das Paket jederzeit kündigen?",
-                a: "Unsere Pakete laufen mit einer dreimonatigen Mindestlaufzeit, danach monatlich kündbar. Wir sind überzeugt von unserer Arbeit und setzen auf langfristige Partnerschaften.",
-              },
-            ].map((faq, i) => (
-              <FaqItem key={i} q={faq.q} a={faq.a} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── FOOTER ── */}
-      <footer className="py-16 px-6 relative overflow-hidden">
-        <div className="section-divider mx-0 mb-12" />
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-4 gap-8 mb-12">
-            <div className="col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-lg font-black" style={{ letterSpacing: "-0.03em" }}>
-                  <span style={{ color: AMBER }}>(n)</span>
-                  <span style={{ color: "#fff" }}>ordinary</span>
-                </span>
-                <span className="text-xs uppercase tracking-widest" style={{ color: "rgba(255,228,188,0.35)" }}>
-                  STUDIOS
-                </span>
-              </div>
-              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,228,188,0.38)" }}>
-                Deine Social Media Agentur in Wien. Wir schaffen Sichtbarkeit, Reichweite und Wachstum.
-              </p>
+      <footer
+        className="px-8 py-16"
+        style={{
+          borderTop: "1px solid rgba(255,255,255,0.05)",
+          background: "rgba(0,0,0,0.4)",
+        }}
+      >
+        <div className="max-w-6xl mx-auto grid grid-cols-4 gap-12">
+          <div className="col-span-2">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-xl font-black" style={{ letterSpacing: "-0.03em" }}>
+                <span style={{ color: AMBER }}>(n)</span>
+                <span style={{ color: "#fff" }}>ordinary</span>
+              </span>
+              <span
+                className="text-xs font-medium uppercase tracking-widest"
+                style={{ color: "rgba(255,255,255,0.3)" }}
+              >
+                studios
+              </span>
             </div>
-            {[
-              {
-                title: "Leistungen",
-                links: ["Social-Media Management", "Content Produktion", "Performance Marketing", "Webdesign"],
-              },
-              {
-                title: "Unternehmen",
-                links: ["Über uns", "Referenzen", "Blog", "Karriere"],
-              },
-              {
-                title: "Kontakt",
-                links: ["office@nordinary.at", "Wien, Österreich", "Erstgespräch buchen"],
-              },
-            ].map((col) => (
-              <div key={col.title}>
-                <div
-                  className="text-xs font-bold uppercase tracking-widest mb-4"
-                  style={{ color: "rgba(245,158,11,0.6)" }}
-                >
-                  {col.title}
-                </div>
-                <ul className="space-y-2">
-                  {col.links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
-                        className="text-xs transition-colors"
-                        style={{ color: "rgba(255,228,188,0.42)", textDecoration: "none" }}
-                        onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(255,228,188,0.8)")}
-                        onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,228,188,0.42)")}
-                      >
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <p
+              className="text-sm leading-relaxed max-w-xs"
+              style={{ color: "rgba(255,228,188,0.38)" }}
+            >
+              Deine Social Media Agentur in Wien. Kreativität und messbare Ergebnisse,
+              die deine Marke nachhaltig sichtbar machen.
+            </p>
           </div>
 
-          <div className="section-divider mb-8" />
-
-          <div className="flex items-center justify-between">
-            <p className="text-xs" style={{ color: "rgba(255,228,188,0.28)" }}>
-              © 2025 (n)ordinary Studios. Alle Rechte vorbehalten.
-            </p>
-            <div className="flex gap-5">
-              {["Impressum", "Datenschutz", "AGB"].map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="text-xs"
-                  style={{ color: "rgba(255,228,188,0.28)", textDecoration: "none" }}
-                >
-                  {link}
-                </a>
-              ))}
+          <div>
+            <div
+              className="text-xs font-bold uppercase tracking-widest mb-5"
+              style={{ color: AMBER, opacity: 0.7 }}
+            >
+              Leistungen
             </div>
+            <ul className="space-y-3">
+              {["Social-Media Management", "Content Produktion", "Performance Marketing", "Webdesign"].map((l) => (
+                <li key={l}>
+                  <a
+                    href="#"
+                    className="text-sm"
+                    style={{ color: "rgba(255,228,188,0.42)", textDecoration: "none" }}
+                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#fff")}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,228,188,0.42)")}
+                  >
+                    {l}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <div
+              className="text-xs font-bold uppercase tracking-widest mb-5"
+              style={{ color: AMBER, opacity: 0.7 }}
+            >
+              Kontakt
+            </div>
+            <ul className="space-y-3">
+              {["office@nordinary.at", "Wien, Österreich", "Instagram", "LinkedIn"].map((l) => (
+                <li key={l}>
+                  <a
+                    href="#"
+                    className="text-sm"
+                    style={{ color: "rgba(255,228,188,0.42)", textDecoration: "none" }}
+                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#fff")}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,228,188,0.42)")}
+                  >
+                    {l}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </footer>
-    </div>
-  );
-}
 
-function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div
-      className="rounded-2xl overflow-hidden"
-      style={{
-        background: "rgba(12, 9, 4, 0.55)",
-        backdropFilter: "blur(16px)",
-        border: open ? "1px solid rgba(245,158,11,0.22)" : "1px solid rgba(255,255,255,0.08)",
-        transition: "border-color 0.3s ease",
-      }}
-    >
-      <button
-        className="w-full flex items-center justify-between px-7 py-5 text-left"
-        onClick={() => setOpen(!open)}
-      >
-        <span className="text-sm font-semibold pr-4" style={{ color: open ? "#fff" : "rgba(255,228,188,0.75)" }}>
-          {q}
-        </span>
-        <span
+        <div
+          className="max-w-6xl mx-auto mt-12 pt-8 flex items-center justify-between text-xs"
           style={{
-            color: AMBER,
-            fontSize: 18,
-            transition: "transform 0.3s ease",
-            transform: open ? "rotate(45deg)" : "rotate(0deg)",
-            flexShrink: 0,
+            borderTop: "1px solid rgba(255,255,255,0.05)",
+            color: "rgba(255,255,255,0.25)",
           }}
         >
-          +
-        </span>
-      </button>
-      {open && (
-        <div className="px-7 pb-6">
-          <p className="text-sm leading-relaxed" style={{ color: "rgba(255,228,188,0.5)" }}>
-            {a}
-          </p>
+          <span>© 2025 (n)ordinary studios. Alle Rechte vorbehalten.</span>
+          <span>Made with ✦ in Vienna</span>
         </div>
-      )}
+      </footer>
     </div>
   );
 }
