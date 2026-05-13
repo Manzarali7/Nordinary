@@ -497,6 +497,227 @@ export function Homepage() {
         </div>
       </section>
 
+      {/* ── LEISTUNGEN TIMELINE ── */}
+      <section className="relative py-28 overflow-hidden">
+        {/* Left glow pillar */}
+        <div
+          className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2"
+          style={{
+            width: 220,
+            height: "80%",
+            background: `radial-gradient(ellipse at 0% 50%,
+              rgba(245,158,11,0.45) 0%,
+              rgba(245,158,11,0.22) 25%,
+              rgba(200,120,0,0.08) 55%,
+              transparent 75%)`,
+            filter: "blur(48px)",
+          }}
+        />
+        {/* Right glow pillar */}
+        <div
+          className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2"
+          style={{
+            width: 220,
+            height: "80%",
+            background: `radial-gradient(ellipse at 100% 50%,
+              rgba(245,158,11,0.45) 0%,
+              rgba(245,158,11,0.22) 25%,
+              rgba(200,120,0,0.08) 55%,
+              transparent 75%)`,
+            filter: "blur(48px)",
+          }}
+        />
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <Badge>Unsere Leistungen</Badge>
+            <h2
+              className="mt-6 font-black"
+              style={{
+                fontSize: "clamp(30px, 4vw, 52px)",
+                letterSpacing: "-0.03em",
+              }}
+            >
+              Im Detail –{" "}
+              <span
+                style={{
+                  background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                was wir für dich tun
+              </span>
+            </h2>
+          </div>
+
+          {/* Timeline */}
+          <div className="relative">
+            {/* Vertical line */}
+            <div
+              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0"
+              style={{
+                width: 1,
+                background: `linear-gradient(to bottom,
+                  transparent,
+                  rgba(245,158,11,0.25) 10%,
+                  rgba(245,158,11,0.25) 90%,
+                  transparent)`,
+              }}
+            />
+
+            {[
+              {
+                num: "01",
+                title: "Social-Media Management",
+                tag: "Management",
+                items: [
+                  "Strategische Content-Planung & Redaktionskalender",
+                  "Professionelles Community Management",
+                  "Plattformbetreuung (Instagram, TikTok, LinkedIn)",
+                  "Monatliches Reporting & Performance-Analyse",
+                  "Laufende Strategie-Optimierung",
+                ],
+                left: false,
+              },
+              {
+                num: "02",
+                title: "Content Produktion",
+                tag: "Produktion",
+                items: [
+                  "Professionelle Foto- & Videoproduktion vor Ort",
+                  "Reel- & Short-Form-Video-Erstellung",
+                  "Skript-Writing & kreative Konzeption",
+                  "Professioneller Videoschnitt & Motion Graphics",
+                  "Thumbnail- & Grafikdesign",
+                ],
+                left: true,
+              },
+              {
+                num: "03",
+                title: "Performance Marketing",
+                tag: "Paid Ads",
+                items: [
+                  "Meta Ads (Facebook & Instagram Kampagnen)",
+                  "Google Ads & YouTube Werbung",
+                  "Zielgruppen-Analyse & Targeting",
+                  "A/B-Testing & Creatives-Optimierung",
+                  "Conversion-Tracking & ROI-Reporting",
+                ],
+                left: false,
+              },
+              {
+                num: "04",
+                title: "Webdesign",
+                tag: "Web",
+                items: [
+                  "Individuelle Website-Konzeption & Design",
+                  "Shopify- & WooCommerce-Shops",
+                  "Mobile-First & responsives Design",
+                  "SEO-Grundoptimierung & Ladezeit-Tuning",
+                  "Laufende Wartung & technischer Support",
+                ],
+                left: true,
+              },
+            ].map((step, i) => (
+              <div
+                key={i}
+                className="relative grid grid-cols-2 gap-8 mb-20 items-center"
+              >
+                {/* Number node on the center line */}
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 z-20 flex items-center justify-center rounded-full font-black text-sm"
+                  style={{
+                    width: 44,
+                    height: 44,
+                    background: `linear-gradient(135deg, ${AMBER}, ${AMBER_DARK})`,
+                    color: "#0a0700",
+                    boxShadow: `0 0 20px rgba(245,158,11,0.5), 0 0 40px rgba(245,158,11,0.2)`,
+                  }}
+                >
+                  {step.num}
+                </div>
+
+                {/* Left cell */}
+                <div className={step.left ? "" : "flex justify-end"}>
+                  {step.left ? (
+                    <GlowCard className="p-7 w-full" intensity={1}>
+                      <div
+                        className="text-xs font-bold uppercase tracking-widest mb-3"
+                        style={{ color: AMBER, opacity: 0.7 }}
+                      >
+                        {step.tag}
+                      </div>
+                      <h3 className="text-xl font-black mb-4" style={{ color: "#fff", letterSpacing: "-0.02em" }}>
+                        {step.title}
+                      </h3>
+                      <ul className="space-y-2">
+                        {step.items.map((item, j) => (
+                          <li key={j} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                            <span style={{ color: AMBER, marginTop: 2, flexShrink: 0 }}>✦</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </GlowCard>
+                  ) : (
+                    /* Decorative icon block */
+                    <div
+                      className="w-48 h-48 rounded-2xl flex items-center justify-center"
+                      style={{
+                        background: "rgba(245,158,11,0.04)",
+                        border: "1px solid rgba(245,158,11,0.1)",
+                      }}
+                    >
+                      <span style={{ fontSize: 72, opacity: 0.15 }}>
+                        {["◈", "◉", "◐", "◑"][i]}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right cell */}
+                <div className={step.left ? "flex justify-start" : ""}>
+                  {step.left ? (
+                    <div
+                      className="w-48 h-48 rounded-2xl flex items-center justify-center"
+                      style={{
+                        background: "rgba(245,158,11,0.04)",
+                        border: "1px solid rgba(245,158,11,0.1)",
+                      }}
+                    >
+                      <span style={{ fontSize: 72, opacity: 0.15 }}>
+                        {["◈", "◉", "◐", "◑"][i]}
+                      </span>
+                    </div>
+                  ) : (
+                    <GlowCard className="p-7 w-full" intensity={1}>
+                      <div
+                        className="text-xs font-bold uppercase tracking-widest mb-3"
+                        style={{ color: AMBER, opacity: 0.7 }}
+                      >
+                        {step.tag}
+                      </div>
+                      <h3 className="text-xl font-black mb-4" style={{ color: "#fff", letterSpacing: "-0.02em" }}>
+                        {step.title}
+                      </h3>
+                      <ul className="space-y-2">
+                        {step.items.map((item, j) => (
+                          <li key={j} className="flex items-start gap-2 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                            <span style={{ color: AMBER, marginTop: 2, flexShrink: 0 }}>✦</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </GlowCard>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <div className="section-divider mx-16" />
 
       {/* ── PAIN POINTS ── */}
