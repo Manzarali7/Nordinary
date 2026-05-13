@@ -42,21 +42,21 @@ function GlowCard({
           borderRadius: "2px 2px 0 0",
         }}
       />
-      {/* ── BOTTOM-RIGHT GLOW: contained circle, bright center → amber → transparent ── */}
+      {/* ── BOTTOM-RIGHT GLOW: large warm amber fill like reference ── */}
       <div
         className="pointer-events-none absolute z-10"
         style={{
-          right: -10,
-          bottom: -10,
-          width: 160 * intensity,
-          height: 160 * intensity,
-          background: `radial-gradient(circle at 78% 78%,
-            rgba(255,248,200,${0.9 * intensity}) 0%,
-            rgba(255,210,40,${0.7 * intensity}) 10%,
-            rgba(245,158,11,${0.45 * intensity}) 28%,
-            rgba(180,100,0,${0.15 * intensity}) 55%,
-            transparent 75%)`,
-          filter: "blur(38px)",
+          right: -40,
+          bottom: -40,
+          width: 280 * intensity,
+          height: 280 * intensity,
+          background: `radial-gradient(circle at 65% 65%,
+            rgba(255,180,30,${0.72 * intensity}) 0%,
+            rgba(230,140,10,${0.55 * intensity}) 18%,
+            rgba(200,110,0,${0.35 * intensity}) 36%,
+            rgba(160,80,0,${0.15 * intensity}) 58%,
+            transparent 76%)`,
+          filter: "blur(28px)",
           borderRadius: "50%",
         }}
       />
