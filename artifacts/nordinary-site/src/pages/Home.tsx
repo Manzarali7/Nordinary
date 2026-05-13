@@ -586,20 +586,6 @@ export default function Home() {
             height="100%"
           />
         </div>
-        {/* Aperture — top-left corner */}
-        <ApertureLightLeak
-          opacity={0.28}
-          size={260}
-          rayCount={10}
-          className="-top-8 -left-8"
-        />
-        {/* Aperture — right side mid */}
-        <ApertureLightLeak
-          opacity={0.18}
-          size={200}
-          rayCount={8}
-          className="top-1/3 -right-10"
-        />
 
         {/* ── 2-col hero content ── */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 lg:px-8 pt-8 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
@@ -1369,8 +1355,6 @@ export default function Home() {
       <section className="py-28 px-6 relative overflow-hidden">
         {/* Dome — bottom right of about section */}
         <DomeLightLeak opacity={0.35} size={480} className="bottom-0 right-0 translate-x-1/4" />
-        {/* Aperture — top left */}
-        <ApertureLightLeak opacity={0.2} size={220} rayCount={10} className="-top-10 left-8" />
         <div className="max-w-6xl mx-auto grid grid-cols-2 gap-16 items-center relative z-10">
           <div>
             <Badge>Wir sind nicht 0815. Wir lösen Probleme.</Badge>
@@ -1453,8 +1437,6 @@ export default function Home() {
             filter: "blur(60px)",
           }}
         />
-        {/* Aperture — top right */}
-        <ApertureLightLeak opacity={0.28} size={260} rayCount={12} className="-top-8 right-12" />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="mb-12">
             <Badge>Ausgewählte Referenzen</Badge>
