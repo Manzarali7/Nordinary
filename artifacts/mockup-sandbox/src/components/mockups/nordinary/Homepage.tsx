@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import UnicornScene from "unicornstudio-react";
 
 const AMBER = "#F59E0B";
 const AMBER_DARK = "#D97706";
@@ -1150,45 +1151,62 @@ export function Homepage() {
           }}
         />
         <div
-          className="max-w-3xl mx-auto text-center relative z-10 rounded-3xl p-16"
+          className="max-w-6xl mx-auto text-center relative rounded-3xl overflow-hidden"
           style={{
-            background: "rgba(14,11,7,0.7)",
             border: "1px solid rgba(245,158,11,0.15)",
-            boxShadow: "0 0 80px rgba(245,158,11,0.06)",
           }}
         >
-          <Badge>Schreib' uns noch heute!</Badge>
-          <h2
-            className="mt-6 font-black"
+          {/* Unicorn Studio WebGL scene fills the card background */}
+          <div className="absolute inset-0 z-0">
+            <UnicornScene
+              projectId="UC9oKoDWjxF2spKEmVE1"
+              sdkUrl="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.12/dist/unicornStudio.umd.js"
+              width="100%"
+              height="100%"
+            />
+          </div>
+          {/* Dark overlay so text stays readable */}
+          <div
+            className="absolute inset-0 z-10 pointer-events-none"
             style={{
-              fontSize: "clamp(28px, 4vw, 52px)",
-              letterSpacing: "-0.03em",
+              background: "rgba(8,6,2,0.55)",
             }}
-          >
-            Worauf willst du noch{" "}
-            <span
+          />
+          {/* Content */}
+          <div className="relative z-20 px-16 py-20">
+            <Badge>Schreib' uns noch heute!</Badge>
+            <h2
+              className="mt-6 font-black"
               style={{
-                background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                fontSize: "clamp(28px, 4vw, 52px)",
+                letterSpacing: "-0.03em",
               }}
             >
-              warten?
-            </span>
-          </h2>
-          <p
-            className="mt-5 leading-relaxed"
-            style={{ color: "rgba(255,255,255,0.5)", fontSize: 17 }}
-          >
-            Jeder Tag ohne professionelle Social-Media-Inhalte{" "}
-            <strong style={{ color: "rgba(255,255,255,0.8)" }}>
-              kostet dich Sichtbarkeit, Reichweite und Kunden
-            </strong>
-            . Handle jetzt – bevor es deine Mitbewerber tun.
-          </p>
-          <button className="btn-primary rounded-full px-10 py-4 text-base mt-8">
-            Erstgespräch vereinbaren
-          </button>
+              Worauf willst du noch{" "}
+              <span
+                style={{
+                  background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                warten?
+              </span>
+            </h2>
+            <p
+              className="mt-5 leading-relaxed max-w-2xl mx-auto"
+              style={{ color: "rgba(255,255,255,0.5)", fontSize: 17 }}
+            >
+              Jeder Tag ohne professionelle Social-Media-Inhalte{" "}
+              <strong style={{ color: "rgba(255,255,255,0.8)" }}>
+                kostet dich Sichtbarkeit, Reichweite und Kunden
+              </strong>
+              . Handle jetzt – bevor es deine Mitbewerber tun.
+            </p>
+            <button className="btn-primary rounded-full px-10 py-4 text-base mt-8">
+              Erstgespräch vereinbaren
+            </button>
+          </div>
         </div>
       </section>
 
