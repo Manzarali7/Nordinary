@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import UnicornScene from "unicornstudio-react";
 
 const AMBER = "#F59E0B";
@@ -119,44 +120,76 @@ function Badge({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Ticker() {
+function ScrollMarquee() {
   const items = [
-    "CONTENT PRODUKTION",
-    "SOCIAL-MEDIA MANAGEMENT",
-    "PERFORMANCE MARKETING",
-    "WEBDESIGN",
-    "GRAFIKDESIGN",
+    "Social-Media Management",
+    "Content Produktion",
+    "Performance Marketing",
+    "Webdesign & Branding",
+    "Community Management",
+    "Paid Ads & ROI",
   ];
-  const doubled = [...items, ...items];
+  const tripled = [...items, ...items, ...items];
 
   return (
-    <div
-      className="relative overflow-hidden py-4"
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: "-8%" }}
+      className="relative w-full overflow-hidden"
       style={{
-        borderTop: "1px solid rgba(255,255,255,0.05)",
-        borderBottom: "1px solid rgba(255,255,255,0.05)",
-        background: "rgba(245,158,11,0.03)",
+        transform: "rotate(-1.5deg) scaleX(1.06)",
+        transformOrigin: "center",
+        marginTop: "2px",
+        marginBottom: "2px",
       }}
     >
       <div
-        className="flex gap-12 whitespace-nowrap"
         style={{
-          animation: "ticker 28s linear infinite",
-          width: "max-content",
+          borderTop: "1px solid rgba(255,255,255,0.09)",
+          borderBottom: "1px solid rgba(255,255,255,0.09)",
+          background: "rgba(6,5,2,0.72)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          padding: "16px 0",
+          overflow: "hidden",
         }}
       >
-        {doubled.map((item, i) => (
-          <span
-            key={i}
-            className="flex items-center gap-6 text-sm font-bold uppercase tracking-widest"
-            style={{ color: "rgba(255,255,255,0.35)" }}
-          >
-            {item}
-            <span style={{ color: AMBER, fontSize: 18 }}>✦</span>
-          </span>
-        ))}
+        <div
+          className="flex whitespace-nowrap"
+          style={{
+            animation: "ticker 34s linear infinite",
+            width: "max-content",
+            gap: "0",
+          }}
+        >
+          {tripled.map((item, i) => (
+            <span
+              key={i}
+              className="flex items-center text-sm font-bold uppercase tracking-widest"
+              style={{
+                color: "rgba(255,255,255,0.45)",
+                paddingLeft: 48,
+                paddingRight: 48,
+              }}
+            >
+              {item}
+              <span
+                style={{
+                  color: AMBER,
+                  fontSize: 14,
+                  opacity: 0.65,
+                  marginLeft: 48,
+                }}
+              >
+                ✦
+              </span>
+            </span>
+          ))}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -512,8 +545,8 @@ export function Homepage() {
         </div>
       </section>
 
-      {/* ── TICKER ── */}
-      <Ticker />
+      {/* ── SCROLL MARQUEE ── */}
+      <ScrollMarquee />
 
       {/* ── SERVICES ── */}
       <section className="py-28 px-6">
