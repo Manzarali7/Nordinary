@@ -14,47 +14,89 @@ function GlowCard({
   intensity?: number;
 }) {
   const [hovered, setHovered] = useState(false);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
   const ref = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
 
   return (
     <div
       ref={ref}
-      className={`relative overflow-hidden rounded-2xl border transition-all duration-300 ${className}`}
+      className={`relative overflow-hidden rounded-2xl transition-all duration-500 ${className}`}
       style={{
-        borderColor: hovered ? `rgba(245,158,11,${0.5 * intensity})` : "rgba(255,255,255,0.07)",
+        /* Glassy transparent background */
         background: hovered
-          ? "rgba(20,16,10,0.95)"
-          : "rgba(14,11,7,0.85)",
+          ? "rgba(18, 14, 6, 0.45)"
+          : "rgba(12, 9, 4, 0.38)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        /* Top-glow stroke via border + box-shadow */
+        border: "1px solid transparent",
+        backgroundClip: "padding-box",
+        /* Outer glow on hover */
         boxShadow: hovered
-          ? `0 0 ${32 * intensity}px rgba(245,158,11,${0.18 * intensity}), 0 0 ${80 * intensity}px rgba(245,158,11,${0.08 * intensity}), inset 0 1px 0 rgba(245,158,11,0.1)`
-          : "0 0 0 rgba(0,0,0,0)",
-        transform: hovered ? `translateY(-${2 * intensity}px)` : "translateY(0)",
+          ? `0 0 ${28 * intensity}px rgba(245,158,11,0.12), 0 ${32 * intensity}px ${60 * intensity}px rgba(0,0,0,0.55)`
+          : `0 8px 40px rgba(0,0,0,0.45)`,
+        transform: hovered ? `translateY(-3px) scale(1.005)` : "translateY(0) scale(1)",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onMouseMove={handleMouseMove}
     >
-      {hovered && (
-        <div
-          className="pointer-events-none absolute"
-          style={{
-            left: pos.x - 120,
-            top: pos.y - 120,
-            width: 240,
-            height: 240,
-            background: `radial-gradient(circle, rgba(245,158,11,${0.12 * intensity}) 0%, transparent 70%)`,
-            borderRadius: "50%",
-          }}
-        />
-      )}
-      {children}
+      {/* Top glowing stroke — always visible, brightens on hover */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0"
+        style={{
+          height: 1,
+          background: hovered
+            ? `linear-gradient(90deg, transparent 5%, rgba(245,158,11,${0.85 * intensity}) 40%, rgba(252,211,77,${0.95 * intensity}) 50%, rgba(245,158,11,${0.85 * intensity}) 60%, transparent 95%)`
+            : `linear-gradient(90deg, transparent 10%, rgba(245,158,11,${0.35 * intensity}) 40%, rgba(252,211,77,${0.5 * intensity}) 50%, rgba(245,158,11,${0.35 * intensity}) 60%, transparent 90%)`,
+          transition: "background 0.4s ease",
+        }}
+      />
+      {/* Top stroke outer blur/bloom */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0"
+        style={{
+          height: 12,
+          background: hovered
+            ? `linear-gradient(180deg, rgba(245,158,11,${0.22 * intensity}) 0%, transparent 100%)`
+            : `linear-gradient(180deg, rgba(245,158,11,${0.08 * intensity}) 0%, transparent 100%)`,
+          transition: "background 0.4s ease",
+        }}
+      />
+      {/* Bottom-right corner glow blob — always present, pulses on hover */}
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          right: hovered ? -30 : -50,
+          bottom: hovered ? -30 : -50,
+          width: hovered ? 280 * intensity : 200 * intensity,
+          height: hovered ? 280 * intensity : 200 * intensity,
+          background: `radial-gradient(circle at 70% 70%, rgba(200,158,0,${hovered ? 0.55 * intensity : 0.3 * intensity}) 0%, rgba(245,158,11,${hovered ? 0.22 * intensity : 0.12 * intensity}) 35%, transparent 70%)`,
+          filter: `blur(${hovered ? 28 : 40}px)`,
+          transition: "all 0.5s ease",
+          borderRadius: "50%",
+        }}
+      />
+      {/* Subtle right-side ambient glow */}
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          right: 0,
+          bottom: "20%",
+          width: 120,
+          height: 120,
+          background: `radial-gradient(circle, rgba(245,158,11,${hovered ? 0.18 * intensity : 0.06 * intensity}) 0%, transparent 70%)`,
+          filter: "blur(16px)",
+          transition: "all 0.5s ease",
+        }}
+      />
+      {/* Card inner border overlay for glassy edge */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl"
+        style={{
+          border: `1px solid rgba(255,255,255,${hovered ? 0.1 : 0.05})`,
+          transition: "border-color 0.4s ease",
+        }}
+      />
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }
