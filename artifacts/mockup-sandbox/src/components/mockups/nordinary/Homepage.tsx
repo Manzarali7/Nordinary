@@ -159,6 +159,109 @@ function Ticker() {
   );
 }
 
+function DomeLightLeak({
+  opacity = 1,
+  size = 440,
+  className = "",
+}: {
+  opacity?: number;
+  size?: number;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`pointer-events-none absolute ${className}`}
+      style={{
+        width: size,
+        height: size * 0.52,
+        background: `radial-gradient(ellipse 100% 100% at 50% 100%,
+          rgba(255,210,0,${0.7 * opacity}) 0%,
+          rgba(245,158,11,${0.45 * opacity}) 22%,
+          rgba(200,130,0,${0.18 * opacity}) 50%,
+          transparent 72%)`,
+        clipPath: "ellipse(50% 100% at 50% 100%)",
+        filter: `blur(${size / 22}px)`,
+      }}
+    />
+  );
+}
+
+function ApertureLightLeak({
+  opacity = 1,
+  size = 320,
+  rayCount = 8,
+  className = "",
+}: {
+  opacity?: number;
+  size?: number;
+  rayCount?: number;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`pointer-events-none absolute ${className}`}
+      style={{ width: size, height: size }}
+    >
+      {/* Radiating rays */}
+      {Array.from({ length: rayCount }).map((_, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            width: 3,
+            height: size * 0.5,
+            transformOrigin: "50% 100%",
+            transform: `translateX(-50%) translateY(-100%) rotate(${i * (360 / rayCount)}deg)`,
+            background: `linear-gradient(to top,
+              rgba(255,215,0,${0.75 * opacity}) 0%,
+              rgba(245,158,11,${0.3 * opacity}) 40%,
+              transparent 100%)`,
+            filter: "blur(2px)",
+          }}
+        />
+      ))}
+      {/* Thin cross beams */}
+      {[0, 90].map((angle) => (
+        <div
+          key={angle}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            width: 1.5,
+            height: size * 0.5,
+            transformOrigin: "50% 100%",
+            transform: `translateX(-50%) translateY(-100%) rotate(${angle}deg)`,
+            background: `linear-gradient(to top,
+              rgba(255,245,150,${0.9 * opacity}) 0%,
+              rgba(255,215,0,${0.5 * opacity}) 30%,
+              transparent 100%)`,
+          }}
+        />
+      ))}
+      {/* Bright center spot */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: size * 0.12,
+          height: size * 0.12,
+          borderRadius: "50%",
+          background: `radial-gradient(circle,
+            rgba(255,245,150,${opacity}) 0%,
+            rgba(255,210,0,${0.6 * opacity}) 40%,
+            transparent 100%)`,
+          filter: "blur(3px)",
+        }}
+      />
+    </div>
+  );
+}
+
 export function Homepage() {
   const [scrolled, setScrolled] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -298,17 +401,28 @@ export function Homepage() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse 70% 55% at 50% 60%, rgba(245,158,11,0.09) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse 70% 55% at 50% 60%, rgba(245,158,11,0.06) 0%, transparent 70%)",
           }}
         />
-        <div
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-          style={{
-            width: 600,
-            height: 600,
-            background: "radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 60%)",
-            filter: "blur(40px)",
-          }}
+        {/* Dome light — bottom center of hero */}
+        <DomeLightLeak
+          opacity={0.55}
+          size={560}
+          className="bottom-0 left-1/2 -translate-x-1/2"
+        />
+        {/* Aperture — top-left corner */}
+        <ApertureLightLeak
+          opacity={0.28}
+          size={260}
+          rayCount={10}
+          className="-top-8 -left-8"
+        />
+        {/* Aperture — right side mid */}
+        <ApertureLightLeak
+          opacity={0.18}
+          size={200}
+          rayCount={8}
+          className="top-1/3 -right-10"
         />
 
         <div className="relative z-10 max-w-4xl mx-auto fadeup">
@@ -868,8 +982,12 @@ export function Homepage() {
       <div className="section-divider mx-16" />
 
       {/* ── ABOUT ── */}
-      <section className="py-28 px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 gap-16 items-center">
+      <section className="py-28 px-6 relative overflow-hidden">
+        {/* Dome — bottom right of about section */}
+        <DomeLightLeak opacity={0.35} size={480} className="bottom-0 right-0 translate-x-1/4" />
+        {/* Aperture — top left */}
+        <ApertureLightLeak opacity={0.2} size={220} rayCount={10} className="-top-10 left-8" />
+        <div className="max-w-6xl mx-auto grid grid-cols-2 gap-16 items-center relative z-10">
           <div>
             <Badge>Wir sind nicht 0815. Wir lösen Probleme.</Badge>
             <h2
@@ -936,8 +1054,12 @@ export function Homepage() {
       </section>
 
       {/* ── REFERENCES ── */}
-      <section className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-28 px-6 relative overflow-hidden">
+        {/* Dome — bottom left */}
+        <DomeLightLeak opacity={0.3} size={400} className="bottom-0 left-0 -translate-x-1/4" />
+        {/* Aperture — top right */}
+        <ApertureLightLeak opacity={0.18} size={200} rayCount={10} className="-top-8 right-12" />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="mb-12">
             <Badge>Ausgewählte Referenzen</Badge>
             <h2
