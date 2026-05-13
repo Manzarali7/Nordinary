@@ -620,21 +620,22 @@ export function Homepage() {
           aria-hidden="true"
           className="pointer-events-none absolute select-none"
           style={{
-            right: 0,
-            top: "50%",
-            transform: "translateY(-50%)",
+            left: 0,
+            top: 0,
             width: 340,
             height: 340,
-            opacity: 0.7,
+            objectFit: "cover",
+            objectPosition: "right center",
+            opacity: 0.18,
             maskImage: [
-              "linear-gradient(to left,   black 0%, black 35%, transparent 100%)",
-              "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
-              "linear-gradient(to top,    black 0%, black 70%, transparent 100%)",
+              "linear-gradient(to right,  black 0%, black 35%, transparent 100%)",
+              "linear-gradient(to bottom, black 0%, black 65%, transparent 100%)",
+              "linear-gradient(to top,    black 0%, black 65%, transparent 100%)",
             ].join(", "),
             WebkitMaskImage: [
-              "linear-gradient(to left,   black 0%, black 35%, transparent 100%)",
-              "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
-              "linear-gradient(to top,    black 0%, black 70%, transparent 100%)",
+              "linear-gradient(to right,  black 0%, black 35%, transparent 100%)",
+              "linear-gradient(to bottom, black 0%, black 65%, transparent 100%)",
+              "linear-gradient(to top,    black 0%, black 65%, transparent 100%)",
             ].join(", "),
             maskComposite: "intersect",
             WebkitMaskComposite: "source-in",
