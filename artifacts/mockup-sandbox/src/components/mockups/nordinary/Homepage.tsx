@@ -21,7 +21,7 @@ function GlowCard({
         background: "rgba(10, 8, 3, 0.42)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
-        border: "1px solid rgba(255,255,255,0.06)",
+        border: "1px solid rgba(255,255,255,0.11)",
         boxShadow: `0 12px 48px rgba(0,0,0,0.6)`,
       }}
     >
@@ -1301,7 +1301,7 @@ export function Homepage() {
                   WebkitBackdropFilter: "blur(24px)",
                   border: plan.highlight
                     ? `1px solid rgba(245,158,11,0.3)`
-                    : "1px solid rgba(255,255,255,0.07)",
+                    : "1px solid rgba(255,255,255,0.11)",
                   boxShadow: plan.highlight
                     ? `0 0 40px rgba(245,158,11,0.08), 0 12px 48px rgba(0,0,0,0.5)`
                     : "0 12px 48px rgba(0,0,0,0.4)",
