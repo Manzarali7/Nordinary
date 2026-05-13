@@ -1193,8 +1193,24 @@ export function Homepage() {
       </section>
 
       {/* ── PRICING ── */}
-      <section className="py-28 px-6">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-28 px-6 relative overflow-hidden">
+        {/* Gold particles background — fades on left, right, top and bottom */}
+        <img
+          src="/__mockup/gold-particles.jpeg"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 w-full h-full object-cover select-none"
+          style={{
+            opacity: 0.18,
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
+            maskComposite: "intersect",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
+            WebkitMaskComposite: "source-in",
+            mixBlendMode: "screen",
+          }}
+        />
+        <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2
               className="font-black"
