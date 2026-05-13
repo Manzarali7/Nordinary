@@ -1201,8 +1201,8 @@ export function Homepage() {
           className="pointer-events-none absolute select-none"
           style={{
             right: 0,
-            top: "50%",
-            transform: "translateY(-50%)",
+            top: "20%",
+            transform: "translateY(-20%)",
             width: 260,
             height: 260,
             objectFit: "cover",
