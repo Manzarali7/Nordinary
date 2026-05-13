@@ -1,6 +1,35 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import UnicornScene from "unicornstudio-react";
+
+const UNICORN_SDK = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.12/dist/unicornStudio.umd.js";
+
+let sdkLoaded = false;
+function loadSdk(): Promise<void> {
+  if (sdkLoaded || (window as any).UnicornStudio) { sdkLoaded = true; return Promise.resolve(); }
+  return new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = UNICORN_SDK;
+    s.onload = () => { sdkLoaded = true; resolve(); };
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+function UnicornEmbed({ projectId, className = "" }: { projectId: string; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    let scene: any = null;
+    loadSdk().then(() => {
+      const US = (window as any).UnicornStudio;
+      if (!ref.current || !US?.addScene) return;
+      US.addScene({ element: ref.current, projectId, scale: 1, dpi: 1.5, fps: 60 })
+        .then((s: any) => { scene = s; })
+        .catch(() => {});
+    });
+    return () => { if (scene?.destroy) scene.destroy(); };
+  }, [projectId]);
+  return <div ref={ref} className={className} style={{ width: "100%", height: "100%" }} />;
+}
 
 const AMBER = "#F59E0B";
 const AMBER_DARK = "#D97706";
@@ -578,12 +607,7 @@ export default function Home() {
         </div>
         {/* UnicornScene — full hero background */}
         <div className="absolute inset-0 z-0 pointer-events-none" style={{ overflow: "hidden" }}>
-          <UnicornScene
-            projectId="vARzVsLoSZuEjXCk2KzN"
-            sdkUrl="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.12/dist/unicornStudio.umd.js"
-            width="100%"
-            height="100%"
-          />
+          <UnicornEmbed projectId="vARzVsLoSZuEjXCk2KzN" />
           {/* Cover the Unicorn Studio watermark that renders bottom-right */}
           <div
             style={{
@@ -1561,12 +1585,7 @@ export default function Home() {
         >
           {/* Unicorn Studio WebGL scene fills the card background */}
           <div className="absolute inset-0 z-0">
-            <UnicornScene
-              projectId="UC9oKoDWjxF2spKEmVE1"
-              sdkUrl="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.12/dist/unicornStudio.umd.js"
-              width="100%"
-              height="100%"
-            />
+            <UnicornEmbed projectId="UC9oKoDWjxF2spKEmVE1" />
           </div>
           {/* Dark overlay so text stays readable */}
           <div
