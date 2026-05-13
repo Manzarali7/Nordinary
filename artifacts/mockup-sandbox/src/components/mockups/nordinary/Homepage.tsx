@@ -621,12 +621,12 @@ export function Homepage() {
           className="pointer-events-none absolute select-none"
           style={{
             left: 0,
-            top: 0,
+            top: 80,
             width: 340,
             height: 340,
             objectFit: "cover",
             objectPosition: "right center",
-            opacity: 0.18,
+            opacity: 0.28,
             maskImage: [
               "linear-gradient(to right,  black 0%, black 35%, transparent 100%)",
               "linear-gradient(to bottom, black 0%, black 65%, transparent 100%)",
