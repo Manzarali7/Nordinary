@@ -280,7 +280,7 @@ export function Homepage() {
       ref={containerRef}
       className="relative overflow-y-auto overflow-x-hidden"
       style={{
-        background: "#0c0c0e",
+        background: "#080808",
         color: "#fff",
         fontFamily: "'Inter', 'Segoe UI', sans-serif",
         minHeight: "100vh",
@@ -346,7 +346,7 @@ export function Homepage() {
         }
 
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #0c0c0e; }
+        ::-webkit-scrollbar-track { background: #080808; }
         ::-webkit-scrollbar-thumb { background: rgba(245,158,11,0.3); border-radius: 2px; }
       `}</style>
 
