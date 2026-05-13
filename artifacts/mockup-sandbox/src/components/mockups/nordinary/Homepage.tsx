@@ -851,8 +851,12 @@ export function Homepage() {
             objectFit: "cover",
             objectPosition: "center top",
             opacity: 0.13,
-            maskImage: "linear-gradient(to bottom, black 0%, black 40%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 40%, transparent 100%)",
+            maskImage: [
+              "linear-gradient(to bottom, transparent 0%, black 18%, black 45%, transparent 100%)",
+            ].join(", "),
+            WebkitMaskImage: [
+              "linear-gradient(to bottom, transparent 0%, black 18%, black 45%, transparent 100%)",
+            ].join(", "),
             mixBlendMode: "screen",
           }}
         />
