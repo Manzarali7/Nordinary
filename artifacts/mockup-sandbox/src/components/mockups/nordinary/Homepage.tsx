@@ -1176,7 +1176,7 @@ export function Homepage() {
         <div
           className="max-w-6xl mx-auto text-center relative rounded-3xl overflow-hidden"
           style={{
-            border: "1px solid rgba(245,158,11,0.15)",
+            border: "1px solid rgba(255,255,255,0.11)",
           }}
         >
           {/* Unicorn Studio WebGL scene fills the card background */}
