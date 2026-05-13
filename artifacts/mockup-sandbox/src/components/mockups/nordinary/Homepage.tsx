@@ -13,89 +13,90 @@ function GlowCard({
   className?: string;
   intensity?: number;
 }) {
-  const [hovered, setHovered] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
   return (
     <div
-      ref={ref}
-      className={`relative overflow-hidden rounded-2xl transition-all duration-500 ${className}`}
+      className={`relative overflow-hidden rounded-2xl ${className}`}
       style={{
-        /* Glassy transparent background */
-        background: hovered
-          ? "rgba(18, 14, 6, 0.45)"
-          : "rgba(12, 9, 4, 0.38)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
-        /* Top-glow stroke via border + box-shadow */
-        border: "1px solid transparent",
-        backgroundClip: "padding-box",
-        /* Outer glow on hover */
-        boxShadow: hovered
-          ? `0 0 ${28 * intensity}px rgba(245,158,11,0.12), 0 ${32 * intensity}px ${60 * intensity}px rgba(0,0,0,0.55)`
-          : `0 8px 40px rgba(0,0,0,0.45)`,
-        transform: hovered ? `translateY(-3px) scale(1.005)` : "translateY(0) scale(1)",
+        background: "rgba(10, 8, 3, 0.42)",
+        backdropFilter: "blur(24px)",
+        WebkitBackdropFilter: "blur(24px)",
+        border: "1px solid rgba(255,255,255,0.06)",
+        boxShadow: `0 12px 48px rgba(0,0,0,0.6)`,
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
-      {/* Top glowing stroke — always visible, brightens on hover */}
+      {/* ── TOP STROKE: bright golden bar across full width ── */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0"
+        className="pointer-events-none absolute inset-x-0 top-0 z-20"
         style={{
-          height: 1,
-          background: hovered
-            ? `linear-gradient(90deg, transparent 5%, rgba(245,158,11,${0.85 * intensity}) 40%, rgba(252,211,77,${0.95 * intensity}) 50%, rgba(245,158,11,${0.85 * intensity}) 60%, transparent 95%)`
-            : `linear-gradient(90deg, transparent 10%, rgba(245,158,11,${0.35 * intensity}) 40%, rgba(252,211,77,${0.5 * intensity}) 50%, rgba(245,158,11,${0.35 * intensity}) 60%, transparent 90%)`,
-          transition: "background 0.4s ease",
+          height: 2,
+          background: `linear-gradient(90deg,
+            transparent 0%,
+            rgba(245,158,11,${0.6 * intensity}) 15%,
+            rgba(252,211,77,${1 * intensity}) 40%,
+            rgba(255,235,120,${1 * intensity}) 50%,
+            rgba(252,211,77,${1 * intensity}) 60%,
+            rgba(245,158,11,${0.6 * intensity}) 85%,
+            transparent 100%)`,
+          borderRadius: "2px 2px 0 0",
         }}
       />
-      {/* Top stroke outer blur/bloom */}
+      {/* Top stroke bloom glow */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0"
+        className="pointer-events-none absolute inset-x-0 top-0 z-20"
         style={{
-          height: 12,
-          background: hovered
-            ? `linear-gradient(180deg, rgba(245,158,11,${0.22 * intensity}) 0%, transparent 100%)`
-            : `linear-gradient(180deg, rgba(245,158,11,${0.08 * intensity}) 0%, transparent 100%)`,
-          transition: "background 0.4s ease",
+          height: 32,
+          background: `linear-gradient(180deg,
+            rgba(245,158,11,${0.35 * intensity}) 0%,
+            rgba(245,158,11,${0.12 * intensity}) 40%,
+            transparent 100%)`,
+          filter: "blur(4px)",
         }}
       />
-      {/* Bottom-right corner glow blob — always present, pulses on hover */}
+
+      {/* ── BOTTOM-RIGHT GLOW: bright white-hot center → amber → transparent ── */}
       <div
-        className="pointer-events-none absolute"
+        className="pointer-events-none absolute z-10"
         style={{
-          right: hovered ? -30 : -50,
-          bottom: hovered ? -30 : -50,
-          width: hovered ? 280 * intensity : 200 * intensity,
-          height: hovered ? 280 * intensity : 200 * intensity,
-          background: `radial-gradient(circle at 70% 70%, rgba(200,158,0,${hovered ? 0.55 * intensity : 0.3 * intensity}) 0%, rgba(245,158,11,${hovered ? 0.22 * intensity : 0.12 * intensity}) 35%, transparent 70%)`,
-          filter: `blur(${hovered ? 28 : 40}px)`,
-          transition: "all 0.5s ease",
+          right: -20,
+          bottom: -20,
+          width: 260 * intensity,
+          height: 260 * intensity,
+          background: `radial-gradient(circle at 80% 80%,
+            rgba(255,248,200,${0.95 * intensity}) 0%,
+            rgba(255,220,60,${0.85 * intensity}) 8%,
+            rgba(245,158,11,${0.65 * intensity}) 20%,
+            rgba(200,120,0,${0.35 * intensity}) 40%,
+            rgba(160,90,0,${0.12 * intensity}) 60%,
+            transparent 78%)`,
+          filter: `blur(${22 / intensity}px)`,
           borderRadius: "50%",
         }}
       />
-      {/* Subtle right-side ambient glow */}
+      {/* Secondary wider amber spread */}
       <div
-        className="pointer-events-none absolute"
+        className="pointer-events-none absolute z-10"
         style={{
-          right: 0,
-          bottom: "20%",
-          width: 120,
-          height: 120,
-          background: `radial-gradient(circle, rgba(245,158,11,${hovered ? 0.18 * intensity : 0.06 * intensity}) 0%, transparent 70%)`,
-          filter: "blur(16px)",
-          transition: "all 0.5s ease",
+          right: -60,
+          bottom: -60,
+          width: 340 * intensity,
+          height: 340 * intensity,
+          background: `radial-gradient(circle at 75% 75%,
+            rgba(245,158,11,${0.28 * intensity}) 0%,
+            rgba(180,100,0,${0.1 * intensity}) 45%,
+            transparent 70%)`,
+          filter: "blur(40px)",
+          borderRadius: "50%",
         }}
       />
-      {/* Card inner border overlay for glassy edge */}
+
+      {/* Card inner border for glassy depth */}
       <div
-        className="pointer-events-none absolute inset-0 rounded-2xl"
+        className="pointer-events-none absolute inset-0 rounded-2xl z-20"
         style={{
-          border: `1px solid rgba(255,255,255,${hovered ? 0.1 : 0.05})`,
-          transition: "border-color 0.4s ease",
+          border: "1px solid rgba(255,255,255,0.07)",
         }}
       />
+
       <div className="relative z-10">{children}</div>
     </div>
   );
