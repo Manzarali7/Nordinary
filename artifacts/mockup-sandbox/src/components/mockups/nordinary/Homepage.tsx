@@ -1129,10 +1129,22 @@ export function Homepage() {
                 highlight: true,
               },
             ].map((plan, i) => (
-              <GlowCard
+              <div
                 key={i}
-                className="p-8 relative"
-                intensity={plan.highlight ? 1.5 : 0.9}
+                className="relative p-8 rounded-2xl"
+                style={{
+                  background: plan.highlight
+                    ? "rgba(18, 14, 6, 0.75)"
+                    : "rgba(12, 9, 4, 0.55)",
+                  backdropFilter: "blur(24px)",
+                  WebkitBackdropFilter: "blur(24px)",
+                  border: plan.highlight
+                    ? `1px solid rgba(245,158,11,0.3)`
+                    : "1px solid rgba(255,255,255,0.07)",
+                  boxShadow: plan.highlight
+                    ? `0 0 40px rgba(245,158,11,0.08), 0 12px 48px rgba(0,0,0,0.5)`
+                    : "0 12px 48px rgba(0,0,0,0.4)",
+                }}
               >
                 {plan.highlight && (
                   <div
@@ -1154,46 +1166,30 @@ export function Homepage() {
                     {plan.name}
                   </div>
                   <div className="flex items-baseline gap-2">
-                    <span
-                      className="text-4xl font-black"
-                      style={{ color: "#fff" }}
-                    >
+                    <span className="text-4xl font-black" style={{ color: "#fff" }}>
                       {plan.price}
                     </span>
                   </div>
-                  <div
-                    className="text-xs mt-1"
-                    style={{ color: "rgba(255,255,255,0.3)" }}
-                  >
+                  <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.3)" }}>
                     {plan.period}
                   </div>
                 </div>
 
-                <div
-                  className="h-px mb-6"
-                  style={{ background: "rgba(255,255,255,0.06)" }}
-                />
+                <div className="h-px mb-6" style={{ background: "rgba(255,255,255,0.06)" }} />
 
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((f, j) => (
                     <li key={j} className="flex items-start gap-3 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
-                      <span
-                        className="mt-0.5 shrink-0"
-                        style={{ color: AMBER }}
-                      >
-                        ✓
-                      </span>
+                      <span className="mt-0.5 shrink-0" style={{ color: AMBER }}>✓</span>
                       {f}
                     </li>
                   ))}
                 </ul>
 
-                <button
-                  className={plan.highlight ? "btn-primary w-full rounded-xl py-3.5" : "btn-outline w-full rounded-xl py-3.5"}
-                >
+                <button className={plan.highlight ? "btn-primary w-full rounded-xl py-3.5" : "btn-outline w-full rounded-xl py-3.5"}>
                   Jetzt starten
                 </button>
-              </GlowCard>
+              </div>
             ))}
           </div>
         </div>
