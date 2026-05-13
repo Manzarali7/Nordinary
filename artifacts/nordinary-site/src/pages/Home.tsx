@@ -1352,10 +1352,22 @@ export default function Home() {
 
       {/* ── REFERENCES ── */}
       <section className="py-28 px-6 relative overflow-hidden">
-        {/* Dome — bottom left */}
-        <DomeLightLeak opacity={0.3} size={400} className="bottom-0 left-0 -translate-x-1/4" />
+        {/* Dome — bottom left, boosted */}
+        <DomeLightLeak opacity={0.7} size={560} className="bottom-0 left-0 -translate-x-1/6" />
+        {/* Soft radial fill behind dome so it bleeds into the section */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            bottom: 0,
+            left: 0,
+            width: 480,
+            height: 480,
+            background: "radial-gradient(ellipse 70% 70% at 20% 100%, rgba(245,158,11,0.18) 0%, transparent 70%)",
+            filter: "blur(60px)",
+          }}
+        />
         {/* Aperture — top right */}
-        <ApertureLightLeak opacity={0.18} size={200} rayCount={10} className="-top-8 right-12" />
+        <ApertureLightLeak opacity={0.28} size={260} rayCount={12} className="-top-8 right-12" />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="mb-12">
             <Badge>Ausgewählte Referenzen</Badge>
@@ -1384,36 +1396,61 @@ export default function Home() {
               {
                 title: "TAXI40100 – Spotify Kampagne",
                 tag: "Paid-Ad Kampagne",
-                color: "#1a2a1a",
+                color: "#0f1f0f",
                 accent: "#4CAF50",
               },
               {
                 title: "KAHLES – Produkt-Launch",
                 tag: "Content Produktion",
-                color: "#1a1a2a",
-                accent: "#5C6BC0",
+                color: "#0f0f1f",
+                accent: "#818CF8",
               },
               {
                 title: "Celesteau – Shopify Shop",
                 tag: "Webdesign",
-                color: "#2a1a1a",
-                accent: "#EF9A9A",
+                color: "#1f0f10",
+                accent: "#F87171",
               },
             ].map((ref, i) => (
               <GlowCard key={i} className="overflow-hidden group" intensity={1.1}>
                 <div
-                  className="h-44 flex items-center justify-center relative"
+                  className="h-44 flex items-center justify-center relative overflow-hidden"
                   style={{ background: ref.color }}
                 >
+                  {/* Strong bottom-left glow bloom */}
                   <div
-                    className="absolute inset-0 opacity-30"
+                    className="absolute pointer-events-none"
                     style={{
-                      background: `radial-gradient(circle at 50% 50%, ${ref.accent}33, transparent 70%)`,
+                      bottom: -20,
+                      left: -20,
+                      width: 200,
+                      height: 200,
+                      background: `radial-gradient(circle at 30% 80%, ${ref.accent}66 0%, ${ref.accent}22 40%, transparent 70%)`,
+                      filter: "blur(20px)",
+                    }}
+                  />
+                  {/* Center fill glow */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `radial-gradient(ellipse 80% 80% at 50% 60%, ${ref.accent}18 0%, transparent 70%)`,
+                    }}
+                  />
+                  {/* Top-right secondary bloom */}
+                  <div
+                    className="absolute pointer-events-none"
+                    style={{
+                      top: -10,
+                      right: -10,
+                      width: 120,
+                      height: 120,
+                      background: `radial-gradient(circle, ${ref.accent}33 0%, transparent 70%)`,
+                      filter: "blur(16px)",
                     }}
                   />
                   <span
-                    className="relative z-10 text-3xl font-black uppercase tracking-tighter opacity-20"
-                    style={{ color: ref.accent }}
+                    className="relative z-10 text-3xl font-black uppercase tracking-tighter"
+                    style={{ color: ref.accent, opacity: 0.35 }}
                   >
                     {ref.title.split("–")[0].trim()}
                   </span>
