@@ -1422,20 +1422,8 @@ export default function Home() {
 
       {/* ── REFERENCES ── */}
       <section className="py-28 px-6 relative overflow-hidden">
-        {/* Dome — bottom left, boosted */}
-        <DomeLightLeak opacity={0.7} size={560} className="bottom-0 left-0 -translate-x-1/6" />
-        {/* Soft radial fill behind dome so it bleeds into the section */}
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            bottom: 0,
-            left: 0,
-            width: 480,
-            height: 480,
-            background: "radial-gradient(ellipse 70% 70% at 20% 100%, rgba(245,158,11,0.18) 0%, transparent 70%)",
-            filter: "blur(60px)",
-          }}
-        />
+        {/* Dome — bottom left */}
+        <DomeLightLeak opacity={0.5} size={560} className="bottom-0 left-0 -translate-x-1/4 -translate-y-1/4" />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="mb-12">
             <Badge>Ausgewählte Referenzen</Badge>
