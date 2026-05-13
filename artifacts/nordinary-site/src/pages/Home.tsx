@@ -577,12 +577,26 @@ export default function Home() {
           <div style={{ position: "absolute", top: 0, bottom: 0, right: "2rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(245,158,11,0.08) 30%, rgba(245,158,11,0.08) 70%, transparent)" }} />
         </div>
         {/* UnicornScene — full hero background */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 z-0 pointer-events-none" style={{ overflow: "hidden" }}>
           <UnicornScene
             projectId="vARzVsLoSZuEjXCk2KzN"
             sdkUrl="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.12/dist/unicornStudio.umd.js"
             width="100%"
             height="100%"
+          />
+          {/* Cover the Unicorn Studio watermark that renders bottom-right */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              right: 0,
+              width: 220,
+              height: 48,
+              background: "transparent",
+              zIndex: 10,
+              pointerEvents: "all",
+            }}
+            onClick={(e) => e.preventDefault()}
           />
         </div>
 
