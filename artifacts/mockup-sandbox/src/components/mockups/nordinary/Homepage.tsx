@@ -614,32 +614,42 @@ export function Homepage() {
 
       {/* ── LEISTUNGEN TIMELINE ── */}
       <section className="relative py-28 overflow-hidden">
-        {/* Left glow pillar */}
-        <div
-          className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2"
+        {/* Right amber glow image */}
+        <img
+          src="/__mockup/amber-glow.png"
+          aria-hidden="true"
+          className="pointer-events-none absolute select-none"
           style={{
-            width: 220,
-            height: "80%",
-            background: `radial-gradient(ellipse at 0% 50%,
-              rgba(245,158,11,0.45) 0%,
-              rgba(245,158,11,0.22) 25%,
-              rgba(200,120,0,0.08) 55%,
-              transparent 75%)`,
-            filter: "blur(48px)",
+            right: 0,
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: 180,
+            height: "90%",
+            objectFit: "cover",
+            objectPosition: "right center",
+            opacity: 0.55,
+            maskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
+            mixBlendMode: "screen",
           }}
         />
-        {/* Right glow pillar */}
-        <div
-          className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2"
+        {/* Left amber glow image — mirrored */}
+        <img
+          src="/__mockup/amber-glow.png"
+          aria-hidden="true"
+          className="pointer-events-none absolute select-none"
           style={{
-            width: 220,
-            height: "80%",
-            background: `radial-gradient(ellipse at 100% 50%,
-              rgba(245,158,11,0.45) 0%,
-              rgba(245,158,11,0.22) 25%,
-              rgba(200,120,0,0.08) 55%,
-              transparent 75%)`,
-            filter: "blur(48px)",
+            left: 0,
+            top: "50%",
+            transform: "translateY(-50%) scaleX(-1)",
+            width: 180,
+            height: "90%",
+            objectFit: "cover",
+            objectPosition: "right center",
+            opacity: 0.55,
+            maskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
+            mixBlendMode: "screen",
           }}
         />
 
