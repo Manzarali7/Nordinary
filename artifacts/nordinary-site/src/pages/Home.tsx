@@ -288,14 +288,13 @@ function DomeLightLeak({
       className={`pointer-events-none absolute ${className}`}
       style={{
         width: size,
-        height: size * 0.52,
-        background: `radial-gradient(ellipse 100% 100% at 50% 100%,
-          rgba(255,210,0,${0.7 * opacity}) 0%,
-          rgba(245,158,11,${0.45 * opacity}) 22%,
-          rgba(200,130,0,${0.18 * opacity}) 50%,
-          transparent 72%)`,
-        clipPath: "ellipse(50% 100% at 50% 100%)",
-        filter: `blur(${size / 22}px)`,
+        height: size,
+        background: `radial-gradient(circle at 50% 50%,
+          rgba(255,210,0,${0.65 * opacity}) 0%,
+          rgba(245,158,11,${0.38 * opacity}) 25%,
+          rgba(200,130,0,${0.12 * opacity}) 55%,
+          transparent 75%)`,
+        filter: `blur(${size / 14}px)`,
       }}
     />
   );
