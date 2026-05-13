@@ -24,18 +24,20 @@ function GlowCard({
         boxShadow: `0 12px 48px rgba(0,0,0,0.6)`,
       }}
     >
-      {/* ── TOP STROKE: bright golden bar across full width ── */}
+      {/* ── TOP STROKE: fades in from left, peaks in center, fades out to right ── */}
       <div
         className="pointer-events-none absolute inset-x-0 top-0 z-20"
         style={{
           height: 2,
           background: `linear-gradient(90deg,
             transparent 0%,
-            rgba(245,158,11,${0.6 * intensity}) 15%,
-            rgba(252,211,77,${1 * intensity}) 40%,
+            transparent 8%,
+            rgba(245,158,11,${0.45 * intensity}) 22%,
+            rgba(252,211,77,${0.95 * intensity}) 42%,
             rgba(255,235,120,${1 * intensity}) 50%,
-            rgba(252,211,77,${1 * intensity}) 60%,
-            rgba(245,158,11,${0.6 * intensity}) 85%,
+            rgba(252,211,77,${0.95 * intensity}) 58%,
+            rgba(245,158,11,${0.45 * intensity}) 78%,
+            transparent 92%,
             transparent 100%)`,
           borderRadius: "2px 2px 0 0",
         }}
@@ -54,7 +56,7 @@ function GlowCard({
             rgba(245,158,11,${0.45 * intensity}) 28%,
             rgba(180,100,0,${0.15 * intensity}) 55%,
             transparent 75%)`,
-          filter: "blur(18px)",
+          filter: "blur(38px)",
           borderRadius: "50%",
         }}
       />
