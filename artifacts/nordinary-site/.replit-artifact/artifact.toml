@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/nordinary-site/"
+title = "(n)ordinary Studios — Site"
+version = "1.0.0"
+id = "artifacts/nordinary-site"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/nordinary-site/" ]
+localPort = 21283
+
+[services.development]
+run = "pnpm --filter @workspace/nordinary-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nordinary-site", "run", "build" ]
+publicDir = "artifacts/nordinary-site/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21283"
+BASE_PATH = "/nordinary-site/"
