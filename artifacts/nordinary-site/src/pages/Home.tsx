@@ -480,6 +480,34 @@ export default function Home() {
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #080808; }
         ::-webkit-scrollbar-thumb { background: rgba(245,158,11,0.3); border-radius: 2px; }
+
+        /* ── Hide Unicorn Studio watermark ── */
+        [data-us-project] ~ a,
+        canvas ~ a,
+        a[href*="unicorn.studio"],
+        a[href*="unicornstudio"],
+        div[style*="unicorn"] a,
+        .unicorn-studio-attribution { display: none !important; }
+
+        @keyframes fadeSlideIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-fade { animation: fadeSlideIn 0.8s ease-out forwards; opacity: 0; }
+        .hero-d1 { animation-delay: 0.1s; }
+        .hero-d2 { animation-delay: 0.2s; }
+        .hero-d3 { animation-delay: 0.3s; }
+        .hero-d4 { animation-delay: 0.4s; }
+        .hero-d5 { animation-delay: 0.5s; }
+
+        @keyframes marqueeScroll {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        .marquee-track { animation: marqueeScroll 40s linear infinite; }
+
+        @keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }
+        .ping { animation: ping 1.2s cubic-bezier(0,0,0.2,1) infinite; }
       `}</style>
 
       {/* ── NAV ── */}
@@ -573,106 +601,260 @@ export default function Home() {
           className="top-1/3 -right-10"
         />
 
-        <div className="relative z-10 max-w-4xl mx-auto fadeup">
-          {/* Announcement badge */}
-          <a
-            href="#"
-            className="inline-flex items-center gap-3 rounded-full px-4 py-1.5 mb-6 text-xs font-medium transition-all hover:opacity-80"
-            style={{
-              background: "rgba(16,11,3,0.7)",
-              border: "1px solid rgba(245,158,11,0.25)",
-              color: "rgba(255,228,188,0.7)",
-              backdropFilter: "blur(10px)",
-              textDecoration: "none",
-            }}
-          >
-            <span style={{ fontSize: 10 }}>✦</span>
-            <span>Jetzt kostenlose Beratung sichern</span>
-            <span style={{ display: "block", height: 14, width: 1, background: "rgba(255,255,255,0.2)" }} />
-            <span style={{ fontSize: 11 }}>→</span>
-          </a>
-          <Badge>Deine Social Media Agentur in Wien</Badge>
+        {/* ── 2-col hero content ── */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 lg:px-8 pt-8 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
 
-          <h1
-            className="mt-8 font-black leading-none"
-            style={{
-              fontSize: "clamp(42px, 7vw, 88px)",
-              letterSpacing: "-0.04em",
-              lineHeight: 1.02,
-            }}
-          >
-            deine{" "}
-            <span
+          {/* LEFT — headline + CTAs */}
+          <div className="lg:col-span-7 flex flex-col justify-center space-y-7">
+
+            {/* Announcement pill */}
+            <div className="hero-fade hero-d1">
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors hover:opacity-80"
+                style={{
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "rgba(255,228,188,0.75)",
+                  backdropFilter: "blur(12px)",
+                  textDecoration: "none",
+                }}
+              >
+                Award-Winning Social Media
+                <span style={{ color: AMBER, fontSize: 13 }}>★</span>
+              </a>
+            </div>
+
+            {/* Headline */}
+            <h1
+              className="hero-fade hero-d2 font-black leading-none"
               style={{
-                background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER}, ${AMBER_DARK})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                fontSize: "clamp(40px, 6vw, 82px)",
+                letterSpacing: "-0.04em",
+                lineHeight: 0.95,
+                maskImage: "linear-gradient(180deg, #fff 0%, #fff 80%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(180deg, #fff 0%, #fff 80%, transparent 100%)",
               }}
             >
-              Social Media
-            </span>
-            <br />
-            Agentur in Wien.
-          </h1>
+              deine{" "}
+              <span
+                style={{
+                  background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER}, ${AMBER_DARK})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Social Media
+              </span>
+              <br />
+              Agentur in Wien.
+            </h1>
 
-          <p
-            className="mt-8 max-w-2xl mx-auto leading-relaxed text-lg"
-            style={{ color: "rgba(255,228,188,0.6)" }}
-          >
-            Individuelle Content-Strategien, die Kreativität und messbare Ergebnisse verbinden.
-            Von smarten Marketingstrategien über professionellen Content bis hin zu maßgeschneidertem
-            Webdesign – wir schaffen Lösungen, die deine Marke stärken.
-          </p>
+            {/* Description */}
+            <p
+              className="hero-fade hero-d3 max-w-xl text-lg leading-relaxed"
+              style={{ color: "rgba(255,228,188,0.55)" }}
+            >
+              Individuelle Content-Strategien, die Kreativität und messbare Ergebnisse verbinden —
+              von smarten Marketingstrategien über professionellen Content bis hin zu
+              maßgeschneidertem Webdesign.
+            </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <button className="btn-primary rounded-full px-8 py-4 text-base">
-              Erstgespräch vereinbaren
-            </button>
-            <button className="btn-outline rounded-full px-8 py-4 text-base">
-              Leistungen entdecken
-            </button>
+            {/* CTAs */}
+            <div className="hero-fade hero-d4 flex flex-row flex-wrap gap-4">
+              <button className="btn-primary rounded-full px-8 py-4 text-sm inline-flex items-center gap-2">
+                Erstgespräch vereinbaren
+                <span style={{ fontSize: 14 }}>→</span>
+              </button>
+              <button
+                className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-semibold transition-colors"
+                style={{
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "#fff",
+                  backdropFilter: "blur(8px)",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.1)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"; }}
+              >
+                ▶ Showreel ansehen
+              </button>
+            </div>
           </div>
 
-          {/* Floating stats */}
-          <div className="mt-16 grid grid-cols-3 gap-6 max-w-lg mx-auto">
-            {[
-              { value: "50+", label: "Unternehmen" },
-              { value: "3+", label: "Jahre Erfahrung" },
-              { value: "100%", label: "Einsatz" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div
-                  className="text-3xl font-black"
-                  style={{
-                    background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER})`,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  {stat.value}
+          {/* RIGHT — stats card + marquee */}
+          <div className="lg:col-span-5 space-y-5 hero-fade hero-d5">
+
+            {/* Stats card */}
+            <div
+              className="relative overflow-hidden rounded-3xl p-7"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.09)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                boxShadow: "0 24px 64px rgba(0,0,0,0.5)",
+              }}
+            >
+              {/* Card glow */}
+              <div
+                className="absolute -top-16 -right-16 w-64 h-64 rounded-full pointer-events-none"
+                style={{ background: `rgba(245,158,11,0.07)`, filter: "blur(40px)" }}
+              />
+
+              <div className="relative z-10">
+                {/* Top stat */}
+                <div className="flex items-center gap-4 mb-7">
+                  <div
+                    className="flex w-12 h-12 items-center justify-center rounded-2xl text-lg font-black"
+                    style={{
+                      background: `linear-gradient(135deg, ${AMBER}22, ${AMBER}11)`,
+                      border: `1px solid ${AMBER}33`,
+                      color: AMBER,
+                    }}
+                  >
+                    ◎
+                  </div>
+                  <div>
+                    <div
+                      className="text-3xl font-black"
+                      style={{
+                        background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER})`,
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                      }}
+                    >
+                      50+
+                    </div>
+                    <div className="text-sm" style={{ color: "rgba(255,228,188,0.45)" }}>Projekte umgesetzt</div>
+                  </div>
                 </div>
-                <div className="text-xs mt-1" style={{ color: "rgba(255,228,188,0.42)" }}>
-                  {stat.label}
+
+                {/* Progress bar */}
+                <div className="space-y-2 mb-7">
+                  <div className="flex justify-between text-sm">
+                    <span style={{ color: "rgba(255,228,188,0.5)" }}>Kundenzufriedenheit</span>
+                    <span className="font-semibold" style={{ color: "#fff" }}>98%</span>
+                  </div>
+                  <div
+                    className="h-2 w-full overflow-hidden rounded-full"
+                    style={{ background: "rgba(255,255,255,0.08)" }}
+                  >
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: "98%",
+                        background: `linear-gradient(to right, ${AMBER_LIGHT}, ${AMBER})`,
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="h-px mb-6" style={{ background: "rgba(255,255,255,0.08)" }} />
+
+                {/* Mini stats */}
+                <div className="grid grid-cols-3 gap-4 text-center mb-7">
+                  {[
+                    { val: "3+", lbl: "Jahre" },
+                    { val: "24/7", lbl: "Support" },
+                    { val: "100%", lbl: "Einsatz" },
+                  ].map((s, i) => (
+                    <div key={i} className="flex flex-col items-center">
+                      <span className="text-xl font-bold text-white">{s.val}</span>
+                      <span
+                        className="text-xs uppercase tracking-wider font-medium"
+                        style={{ color: "rgba(255,228,188,0.38)" }}
+                      >
+                        {s.lbl}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Tag pills */}
+                <div className="flex flex-wrap gap-2">
+                  <div
+                    className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium tracking-wide"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      color: "rgba(255,228,188,0.65)",
+                    }}
+                  >
+                    <span className="relative flex w-2 h-2">
+                      <span
+                        className="ping absolute inline-flex w-full h-full rounded-full"
+                        style={{ background: "rgba(74,222,128,0.75)" }}
+                      />
+                      <span
+                        className="relative inline-flex w-2 h-2 rounded-full"
+                        style={{ background: "#22c55e" }}
+                      />
+                    </span>
+                    AKTIV
+                  </div>
+                  <div
+                    className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium tracking-wide"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      color: "rgba(255,228,188,0.65)",
+                    }}
+                  >
+                    <span style={{ color: AMBER }}>♛</span>
+                    PREMIUM
+                  </div>
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Client marquee card */}
+            <div
+              className="relative overflow-hidden rounded-3xl py-7"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.09)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+              }}
+            >
+              <p
+                className="mb-5 px-7 text-sm font-medium"
+                style={{ color: "rgba(255,228,188,0.4)" }}
+              >
+                Vertrauen von führenden Unternehmen
+              </p>
+              <div
+                className="relative flex overflow-hidden"
+                style={{
+                  maskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
+                  WebkitMaskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
+                }}
+              >
+                <div className="marquee-track flex gap-10 whitespace-nowrap px-4">
+                  {[...Array(3)].flatMap((_, ri) =>
+                    ["TAXI40100", "KAHLES", "Celesteau", "Zahnlabor Groß", "Gerhard Moser"].map((name, i) => (
+                      <span
+                        key={`${ri}-${i}`}
+                        className="text-base font-bold uppercase tracking-tight transition-opacity hover:opacity-100"
+                        style={{ color: "rgba(255,255,255,0.35)", letterSpacing: "-0.01em" }}
+                      >
+                        {name}
+                      </span>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
         {/* Scroll indicator */}
-        <div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40"
-        >
-          <span className="text-xs uppercase tracking-widest" style={{ color: AMBER }}>
-            Scroll
-          </span>
-          <div
-            style={{
-              width: 1,
-              height: 40,
-              background: `linear-gradient(to bottom, ${AMBER}, transparent)`,
-            }}
-          />
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10" style={{ opacity: 0.35 }}>
+          <span className="text-xs uppercase tracking-widest" style={{ color: AMBER }}>Scroll</span>
+          <div style={{ width: 1, height: 36, background: `linear-gradient(to bottom, ${AMBER}, transparent)` }} />
         </div>
       </section>
 
