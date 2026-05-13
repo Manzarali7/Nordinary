@@ -836,8 +836,27 @@ export function Homepage() {
       <div className="section-divider mx-16" />
 
       {/* ── PAIN POINTS ── */}
-      <section className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-28 px-6 relative overflow-hidden">
+        {/* Gold streaks — top of section, low opacity */}
+        <img
+          src="/__mockup/gold-streaks.png"
+          aria-hidden="true"
+          className="pointer-events-none absolute select-none"
+          style={{
+            top: 0,
+            left: 0,
+            right: 0,
+            width: "100%",
+            height: 340,
+            objectFit: "cover",
+            objectPosition: "center top",
+            opacity: 0.13,
+            maskImage: "linear-gradient(to bottom, black 0%, black 40%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 40%, transparent 100%)",
+            mixBlendMode: "screen",
+          }}
+        />
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2
               className="font-black"
