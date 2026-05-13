@@ -614,41 +614,30 @@ export function Homepage() {
 
       {/* ── LEISTUNGEN TIMELINE ── */}
       <section className="relative py-28 overflow-hidden">
-        {/* Right amber glow image */}
+        {/* Right amber glow — natural aspect ratio, fades left + top + bottom */}
         <img
-          src="/__mockup/amber-glow.png"
+          src="/__mockup/amber-glow2.png"
           aria-hidden="true"
           className="pointer-events-none absolute select-none"
           style={{
             right: 0,
             top: "50%",
             transform: "translateY(-50%)",
-            width: 110,
-            height: "70%",
-            objectFit: "cover",
-            objectPosition: "right center",
-            opacity: 0.55,
-            maskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
-            mixBlendMode: "screen",
-          }}
-        />
-        {/* Left amber glow image — mirrored */}
-        <img
-          src="/__mockup/amber-glow.png"
-          aria-hidden="true"
-          className="pointer-events-none absolute select-none"
-          style={{
-            left: 0,
-            top: "50%",
-            transform: "translateY(-50%) scaleX(-1)",
-            width: 110,
-            height: "70%",
-            objectFit: "cover",
-            objectPosition: "right center",
-            opacity: 0.55,
-            maskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to left, black 0%, black 30%, transparent 100%)",
+            width: 240,
+            height: "auto",
+            opacity: 0.7,
+            maskImage: [
+              "linear-gradient(to left,   black 0%, black 35%, transparent 100%)",
+              "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+              "linear-gradient(to top,    black 0%, black 70%, transparent 100%)",
+            ].join(", "),
+            WebkitMaskImage: [
+              "linear-gradient(to left,   black 0%, black 35%, transparent 100%)",
+              "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+              "linear-gradient(to top,    black 0%, black 70%, transparent 100%)",
+            ].join(", "),
+            maskComposite: "intersect",
+            WebkitMaskComposite: "source-in",
             mixBlendMode: "screen",
           }}
         />
