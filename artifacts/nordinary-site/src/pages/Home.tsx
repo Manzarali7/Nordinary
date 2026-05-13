@@ -590,7 +590,7 @@ export default function Home() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse 70% 55% at 50% 60%, rgba(245,158,11,0.11) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse 70% 55% at 50% 60%, rgba(250,204,21,0.14) 0%, transparent 70%)",
           }}
         />
         {/* ── Vertical border lines (outer) ── */}
@@ -600,10 +600,10 @@ export default function Home() {
         </div>
         {/* ── Inner faded content borders ── */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          <div style={{ position: "absolute", top: 0, bottom: 0, left: "1rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(245,158,11,0.2) 30%, rgba(245,158,11,0.2) 70%, transparent)" }} />
-          <div style={{ position: "absolute", top: 0, bottom: 0, right: "1rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(245,158,11,0.2) 30%, rgba(245,158,11,0.2) 70%, transparent)" }} />
-          <div style={{ position: "absolute", top: 0, bottom: 0, left: "2rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(245,158,11,0.08) 30%, rgba(245,158,11,0.08) 70%, transparent)" }} />
-          <div style={{ position: "absolute", top: 0, bottom: 0, right: "2rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(245,158,11,0.08) 30%, rgba(245,158,11,0.08) 70%, transparent)" }} />
+          <div style={{ position: "absolute", top: 0, bottom: 0, left: "1rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(250,204,21,0.25) 30%, rgba(250,204,21,0.25) 70%, transparent)" }} />
+          <div style={{ position: "absolute", top: 0, bottom: 0, right: "1rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(250,204,21,0.25) 30%, rgba(250,204,21,0.25) 70%, transparent)" }} />
+          <div style={{ position: "absolute", top: 0, bottom: 0, left: "2rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(250,204,21,0.10) 30%, rgba(250,204,21,0.10) 70%, transparent)" }} />
+          <div style={{ position: "absolute", top: 0, bottom: 0, right: "2rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(250,204,21,0.10) 30%, rgba(250,204,21,0.10) 70%, transparent)" }} />
         </div>
         {/* UnicornScene — full hero background */}
         <div className="absolute inset-0 z-0 pointer-events-none" style={{ overflow: "hidden" }}>
