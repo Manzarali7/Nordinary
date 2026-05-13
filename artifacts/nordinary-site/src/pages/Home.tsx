@@ -549,12 +549,15 @@ export default function Home() {
           <div style={{ position: "absolute", top: 0, bottom: 0, left: "2rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(245,158,11,0.08) 30%, rgba(245,158,11,0.08) 70%, transparent)" }} />
           <div style={{ position: "absolute", top: 0, bottom: 0, right: "2rem", width: 1, background: "linear-gradient(to bottom, transparent, rgba(245,158,11,0.08) 30%, rgba(245,158,11,0.08) 70%, transparent)" }} />
         </div>
-        {/* Dome light — bottom center of hero */}
-        <DomeLightLeak
-          opacity={0.55}
-          size={560}
-          className="bottom-0 left-1/2 -translate-x-1/2"
-        />
+        {/* UnicornScene — full hero background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <UnicornScene
+            projectId="vARzVsLoSZuEjXCk2KzN"
+            sdkUrl="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.12/dist/unicornStudio.umd.js"
+            width="100%"
+            height="100%"
+          />
+        </div>
         {/* Aperture — top-left corner */}
         <ApertureLightLeak
           opacity={0.28}
@@ -1181,171 +1184,73 @@ export default function Home() {
       <div className="section-divider mx-16" />
 
       {/* ── ABOUT ── */}
-      <section id="about" className="py-28 px-6 relative overflow-hidden">
-        {/* Ambient glow */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse 70% 60% at 70% 50%, rgba(245,158,11,0.06) 0%, transparent 70%)",
-          }}
-        />
+      <section className="py-28 px-6 relative overflow-hidden">
+        {/* Dome — bottom right of about section */}
+        <DomeLightLeak opacity={0.35} size={480} className="bottom-0 right-0 translate-x-1/4" />
         {/* Aperture — top left */}
         <ApertureLightLeak opacity={0.2} size={220} rayCount={10} className="-top-10 left-8" />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="grid grid-cols-2 gap-16 items-center">
-
-            {/* LEFT — text content */}
-            <div>
-              <Badge>Über uns</Badge>
-              <h2
-                className="mt-6 font-black leading-tight"
+        <div className="max-w-6xl mx-auto grid grid-cols-2 gap-16 items-center relative z-10">
+          <div>
+            <Badge>Wir sind nicht 0815. Wir lösen Probleme.</Badge>
+            <h2
+              className="mt-6 font-black leading-tight"
+              style={{
+                fontSize: "clamp(28px, 3.5vw, 46px)",
+                letterSpacing: "-0.03em",
+              }}
+            >
+              (n)ordinary studios schafft{" "}
+              <span
                 style={{
-                  fontSize: "clamp(28px, 3.5vw, 48px)",
-                  letterSpacing: "-0.03em",
+                  background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
                 }}
               >
-                Wir sind nicht 0815 —{" "}
-                <span
+                Wirkung
+              </span>{" "}
+              für Ihr Unternehmen.
+            </h2>
+            <p
+              className="mt-6 leading-relaxed"
+              style={{ color: "rgba(255,228,188,0.52)", fontSize: 16 }}
+            >
+              Wir haben unzählige Kampagnen konzipiert und umgesetzt, die nicht nur Reichweite
+              generierten, sondern echte Verbindungen geschafft haben. Von kreativen
+              Content-Strategien über präzises Targeting bis hin zur Performance-Analyse –
+              wir kombinieren Kreativität mit datenbasiertem Denken.
+            </p>
+            <button className="btn-primary rounded-full px-7 py-3.5 text-sm mt-8">
+              Mehr erfahren
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { val: "50+", label: "Unternehmen in Österreich vertrauen uns" },
+              { val: "100%", label: "Einsatz bei jedem Projekt" },
+              { val: "3+", label: "Jahre Agenturerfahrung" },
+              { val: "∞", label: "Kreativität ohne Grenzen" },
+            ].map((stat, i) => (
+              <GlowCard key={i} className="p-6 text-center" intensity={0.8}>
+                <div
+                  className="text-3xl font-black mb-2"
                   style={{
                     background: `linear-gradient(135deg, ${AMBER_LIGHT}, ${AMBER})`,
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  wir machen Wirkung.
-                </span>
-              </h2>
-              <p
-                className="mt-6 leading-relaxed"
-                style={{ color: "rgba(255,228,188,0.52)", fontSize: 16 }}
-              >
-                (n)ordinary studios ist deine Wiener Social-Media-Agentur mit echtem Einsatz.
-                Wir kombinieren kreative Content-Strategien mit datenbasiertem Denken —
-                für Kampagnen, die nicht nur Reichweite generieren, sondern echte
-                Verbindungen schaffen und messbare Ergebnisse liefern.
-              </p>
-
-              {/* Feature list */}
-              <ul className="mt-8 space-y-4">
-                {[
-                  "Strategische Beratung von Anfang an",
-                  "Kreativität trifft Performance-Denken",
-                  "Transparentes Reporting & laufende Optimierung",
-                  "Persönlicher Ansprechpartner – kein Ticketsystem",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "rgba(255,228,188,0.65)" }}>
-                    <span
-                      className="mt-0.5 shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-black"
-                      style={{
-                        background: `linear-gradient(135deg, ${AMBER}22, ${AMBER}11)`,
-                        border: `1px solid ${AMBER}44`,
-                        color: AMBER,
-                      }}
-                    >
-                      ✦
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-10 flex items-center gap-4">
-                <button className="btn-primary rounded-full px-7 py-3.5 text-sm">
-                  Mehr über uns
-                </button>
-                <button className="btn-outline rounded-full px-7 py-3.5 text-sm">
-                  Erstgespräch buchen
-                </button>
-              </div>
-            </div>
-
-            {/* RIGHT — 3D figure image */}
-            <div className="relative flex items-center justify-center">
-              {/* Repeating text backdrop */}
-              <div
-                className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden select-none pointer-events-none"
-                style={{ opacity: 0.07 }}
-              >
-                {Array.from({ length: 7 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="text-2xl font-black uppercase tracking-widest whitespace-nowrap"
-                    style={{
-                      color: "#fff",
-                      letterSpacing: "0.18em",
-                      lineHeight: 1.6,
-                      transform: `translateX(${(i % 2 === 0) ? "-8%" : "8%"})`,
-                    }}
-                  >
-                    (N)ORDINARY OF THE WAY
-                  </div>
-                ))}
-              </div>
-
-              {/* Outer amber glow ring */}
-              <div
-                className="absolute rounded-full"
-                style={{
-                  width: 420,
-                  height: 420,
-                  background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%)",
-                  filter: "blur(40px)",
-                }}
-              />
-
-              {/* Figure image */}
-              <div
-                className="relative z-10 rounded-3xl overflow-hidden"
-                style={{
-                  width: 400,
-                  height: 400,
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  background: "rgba(8,6,2,0.6)",
-                  backdropFilter: "blur(8px)",
-                  boxShadow: "0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,158,11,0.08)",
-                }}
-              >
-                <img
-                  src={`${BASE}about-figure.png`}
-                  alt="(n)ordinary studios"
-                  className="w-full h-full object-cover"
-                />
-                {/* Subtle amber vignette overlay */}
+                  {stat.val}
+                </div>
                 <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: "radial-gradient(ellipse 100% 100% at 50% 100%, rgba(245,158,11,0.12) 0%, transparent 60%)",
-                  }}
-                />
-              </div>
-
-              {/* Floating stat pills */}
-              <div
-                className="absolute -bottom-4 -left-4 z-20 px-4 py-2.5 rounded-2xl"
-                style={{
-                  background: "rgba(12,9,3,0.9)",
-                  border: "1px solid rgba(245,158,11,0.25)",
-                  backdropFilter: "blur(16px)",
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-                }}
-              >
-                <div className="text-2xl font-black" style={{ color: AMBER }}>50+</div>
-                <div className="text-xs" style={{ color: "rgba(255,228,188,0.5)" }}>Unternehmen betreut</div>
-              </div>
-              <div
-                className="absolute -top-4 -right-4 z-20 px-4 py-2.5 rounded-2xl"
-                style={{
-                  background: "rgba(12,9,3,0.9)",
-                  border: "1px solid rgba(245,158,11,0.25)",
-                  backdropFilter: "blur(16px)",
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-                }}
-              >
-                <div className="text-2xl font-black" style={{ color: AMBER }}>3+</div>
-                <div className="text-xs" style={{ color: "rgba(255,228,188,0.5)" }}>Jahre Erfahrung</div>
-              </div>
-            </div>
+                  className="text-xs leading-snug"
+                  style={{ color: "rgba(255,228,188,0.42)" }}
+                >
+                  {stat.label}
+                </div>
+              </GlowCard>
+            ))}
           </div>
         </div>
       </section>
