@@ -40,51 +40,21 @@ function GlowCard({
           borderRadius: "2px 2px 0 0",
         }}
       />
-      {/* Top stroke bloom glow */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-20"
-        style={{
-          height: 32,
-          background: `linear-gradient(180deg,
-            rgba(245,158,11,${0.35 * intensity}) 0%,
-            rgba(245,158,11,${0.12 * intensity}) 40%,
-            transparent 100%)`,
-          filter: "blur(4px)",
-        }}
-      />
-
-      {/* ── BOTTOM-RIGHT GLOW: bright white-hot center → amber → transparent ── */}
+      {/* ── BOTTOM-RIGHT GLOW: contained, bright center → amber → transparent ── */}
       <div
         className="pointer-events-none absolute z-10"
         style={{
-          right: -20,
-          bottom: -20,
-          width: 260 * intensity,
-          height: 260 * intensity,
-          background: `radial-gradient(circle at 80% 80%,
-            rgba(255,248,200,${0.95 * intensity}) 0%,
-            rgba(255,220,60,${0.85 * intensity}) 8%,
-            rgba(245,158,11,${0.65 * intensity}) 20%,
-            rgba(200,120,0,${0.35 * intensity}) 40%,
-            rgba(160,90,0,${0.12 * intensity}) 60%,
-            transparent 78%)`,
-          filter: `blur(${22 / intensity}px)`,
-          borderRadius: "50%",
-        }}
-      />
-      {/* Secondary wider amber spread */}
-      <div
-        className="pointer-events-none absolute z-10"
-        style={{
-          right: -60,
-          bottom: -60,
-          width: 340 * intensity,
-          height: 340 * intensity,
-          background: `radial-gradient(circle at 75% 75%,
-            rgba(245,158,11,${0.28 * intensity}) 0%,
-            rgba(180,100,0,${0.1 * intensity}) 45%,
-            transparent 70%)`,
-          filter: "blur(40px)",
+          right: -10,
+          bottom: -10,
+          width: 160 * intensity,
+          height: 160 * intensity,
+          background: `radial-gradient(circle at 78% 78%,
+            rgba(255,248,200,${0.9 * intensity}) 0%,
+            rgba(255,210,40,${0.7 * intensity}) 10%,
+            rgba(245,158,11,${0.45 * intensity}) 28%,
+            rgba(180,100,0,${0.15 * intensity}) 55%,
+            transparent 75%)`,
+          filter: "blur(18px)",
           borderRadius: "50%",
         }}
       />
