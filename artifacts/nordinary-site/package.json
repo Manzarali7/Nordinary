@@ -10,7 +10,10 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "unicornstudio-react": "^1.5.2"
+    "gsap": "^3.12.5",
+    "lenis": "^1.3.23",
+    "react-use-measure": "^2.1.7",
+    "unicornstudio-react": "^2.1.9"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",
