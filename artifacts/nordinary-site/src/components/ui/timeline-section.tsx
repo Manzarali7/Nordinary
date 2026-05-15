@@ -127,6 +127,8 @@ export function TimelineSection() {
       );
 
       // 2. Each row: number node + card slide in as line reaches them
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
       STEPS.forEach((step, i) => {
         const row  = rowRefs.current[i];
         const node = nodeRefs.current[i];
@@ -146,7 +148,7 @@ export function TimelineSection() {
             ease: "back.out(1.7)",
             scrollTrigger: {
               trigger: row,
-              start: "top 65%",
+              start: isMobile ? "top 88%" : "top 65%",
               toggleActions: "play none none reverse",
             },
           }
@@ -155,15 +157,16 @@ export function TimelineSection() {
         // Card slides + fades in
         gsap.fromTo(
           card,
-          { x: cardDir, opacity: 0 },
+          isMobile ? { y: 48, opacity: 0 } : { x: cardDir, opacity: 0 },
           {
             x: 0,
+            y: 0,
             opacity: 1,
             duration: 0.7,
             ease: "power3.out",
             scrollTrigger: {
               trigger: row,
-              start: "top 65%",
+              start: isMobile ? "top 85%" : "top 65%",
               toggleActions: "play none none reverse",
             },
           }
@@ -181,14 +184,14 @@ export function TimelineSection() {
         {/* Background track line (always visible, very faint) */}
         <div
           ref={lineTrackRef}
-          className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 pointer-events-none"
+          className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 pointer-events-none"
           style={{ width: 1, background: "rgba(255,233,71,0.08)" }}
         />
 
         {/* Animated fill line */}
         <div
           ref={lineFillRef}
-          className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 pointer-events-none origin-top"
+          className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 pointer-events-none origin-top"
           style={{
             width: 4,
             scaleY: 0,
@@ -207,15 +210,15 @@ export function TimelineSection() {
           <div
             key={i}
             ref={(el) => { rowRefs.current[i] = el; }}
-            className="relative grid grid-cols-2 gap-8 mb-48 items-center"
+            className="relative flex flex-col gap-5 mb-12 pl-14 md:pl-0 md:grid md:grid-cols-2 md:gap-8 md:mb-48 md:items-center"
           >
             {/* Animated number node */}
             <div
               ref={(el) => { nodeRefs.current[i] = el; }}
-              className="absolute left-1/2 -translate-x-1/2 z-20 flex items-center justify-center rounded-full font-bold text-sm"
+              className="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 md:top-auto z-20 flex items-center justify-center rounded-full font-bold text-xs md:text-sm"
               style={{
-                width: 44,
-                height: 44,
+                width: 40,
+                height: 40,
                 background: `linear-gradient(135deg, ${AMBER}, ${AMBER_DARK})`,
                 color: "#0a0700",
                 boxShadow: `0 0 20px rgba(255,233,71,0.5), 0 0 40px rgba(255,233,71,0.2)`,
@@ -227,11 +230,11 @@ export function TimelineSection() {
             </div>
 
             {/* Left cell */}
-            <div className={step.left ? "" : "flex justify-end"}>
+            <div className={`order-2 md:order-none w-full ${step.left ? "" : "md:flex md:justify-end"}`}>
               {step.left ? (
                 <div ref={(el) => { if (!step.left || step.left) cardRefs.current[i] = el; }}>
                   <BorderGlow className="w-full" borderRadius={16} glowIntensity={0.25} fillOpacity={0.1} glowRadius={15} coneSpread={12}>
-                    <div className="p-7 relative overflow-hidden group">
+                    <div className="p-5 md:p-7 relative overflow-hidden group">
                       <div 
                         className="absolute -bottom-2 -right-2 w-20 h-20 opacity-[0.03] pointer-events-none group-hover:opacity-[0.06] transition-opacity"
                         style={{
@@ -245,7 +248,7 @@ export function TimelineSection() {
                       <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: AMBER, opacity: 0.7 }}>
                         {step.tag}
                       </div>
-                      <h3 className="mb-4 text-xl font-bold tracking-tight text-white">{step.title}</h3>
+                      <h3 className="mb-3 md:mb-4 text-lg md:text-xl font-bold tracking-tight text-white">{step.title}</h3>
                       <ul className="space-y-2">
                         {step.items.map((item, j) => (
                           <li key={j} className="flex items-start gap-2 text-sm font-normal text-neutral-400">
@@ -260,7 +263,7 @@ export function TimelineSection() {
                 </div>
               ) : (
                 <div
-                  className="w-36 h-36 rounded-2xl flex items-center justify-center"
+                  className="order-1 md:order-none w-24 h-24 md:w-36 md:h-36 rounded-2xl flex items-center justify-center mx-auto md:mx-0"
                   style={{ background: "rgba(255,233,71,0.04)", border: "1px solid rgba(255,233,71,0.1)" }}
                 >
                   <span style={{ animation: "float 4s ease-in-out infinite", animationDelay: `${i * -1.2}s` }}>{ICONS[i]}</span>
@@ -269,10 +272,10 @@ export function TimelineSection() {
             </div>
 
             {/* Right cell */}
-            <div className={step.left ? "flex justify-start" : ""}>
+            <div className={`order-2 md:order-none w-full ${step.left ? "md:flex md:justify-start" : ""}`}>
               {step.left ? (
                 <div
-                  className="w-36 h-36 rounded-2xl flex items-center justify-center"
+                  className="order-1 md:order-none w-24 h-24 md:w-36 md:h-36 rounded-2xl flex items-center justify-center mx-auto md:mx-0"
                   style={{ background: "rgba(255,233,71,0.04)", border: "1px solid rgba(255,233,71,0.1)" }}
                 >
                   <span style={{ animation: "float 4s ease-in-out infinite", animationDelay: `${i * -1.2}s` }}>{ICONS[i]}</span>
@@ -280,7 +283,7 @@ export function TimelineSection() {
               ) : (
                 <div ref={(el) => { cardRefs.current[i] = el; }}>
                   <BorderGlow className="w-full" borderRadius={16} glowIntensity={0.25} fillOpacity={0.1} glowRadius={15} coneSpread={12}>
-                    <div className="p-7 relative overflow-hidden group">
+                    <div className="p-5 md:p-7 relative overflow-hidden group">
                       <div 
                         className="absolute -bottom-2 -right-2 w-20 h-20 opacity-[0.03] pointer-events-none group-hover:opacity-[0.06] transition-opacity"
                         style={{
@@ -294,7 +297,7 @@ export function TimelineSection() {
                       <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: AMBER, opacity: 0.7 }}>
                         {step.tag}
                       </div>
-                      <h3 className="mb-4 text-xl font-bold tracking-tight text-white">{step.title}</h3>
+                      <h3 className="mb-3 md:mb-4 text-lg md:text-xl font-bold tracking-tight text-white">{step.title}</h3>
                       <ul className="space-y-2">
                         {step.items.map((item, j) => (
                           <li key={j} className="flex items-start gap-2 text-sm font-normal text-neutral-400">

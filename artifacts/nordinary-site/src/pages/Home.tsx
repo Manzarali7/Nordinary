@@ -275,19 +275,22 @@ export default function Home() {
     const ctx = gsap.context(() => {
       // reveal staggered logic
       const revealContainers = document.querySelectorAll('.reveal-container');
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      const cardStagger = isMobile ? 0.35 : 0.2;
+
       revealContainers.forEach(container => {
         const reveals = container.querySelectorAll('.reveal');
         gsap.fromTo(reveals, 
-          { y: 30, opacity: 0 },
+          { y: isMobile ? 40 : 30, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
-            stagger: 0.2,
+            duration: isMobile ? 0.65 : 0.8,
+            stagger: cardStagger,
             ease: "power3.out",
             scrollTrigger: {
               trigger: container,
-              start: "top 85%",
+              start: isMobile ? "top 90%" : "top 85%",
               toggleActions: "play none none reverse",
             }
           }
@@ -404,8 +407,8 @@ export default function Home() {
       <HeroSection />
 
       {/* ── ABOUT ── */}
-      <section className="py-28 px-6 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 gap-16 items-center relative z-10">
+      <section className="py-16 md:py-28 px-4 md:px-6 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10">
           <div>
             <div className="reveal"><Badge>Wir sind nicht 0815. Wir lösen Probleme.</Badge></div>
             <h2
@@ -430,7 +433,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="stats-mobile-stack reveal-container">
             {[
               { val: "50+", label: "Unternehmen in Österreich vertrauen uns" },
               { val: "100%", label: "Einsatz bei jedem Projekt" },
@@ -455,7 +458,7 @@ export default function Home() {
 
 
       {/* ── SERVICES ── */}
-      <section className="py-28 px-6 relative overflow-hidden" id="services">
+      <section className="py-16 md:py-28 px-4 md:px-6 relative overflow-hidden" id="services">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -489,15 +492,15 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="section-divider mx-16" />
+      <div className="section-divider mx-4 md:mx-16" />
 
       {/* ── LEISTUNGEN TIMELINE ── */}
-      <section className="relative py-28 overflow-hidden">
+      <section className="relative py-16 md:py-28 overflow-hidden px-4 md:px-0">
         {/* Right amber glow — natural aspect ratio, fades left + top + bottom */}
         <img
           src={`${BASE}gold-particles.jpeg`}
           aria-hidden="true"
-          className="pointer-events-none absolute select-none"
+          className="pointer-events-none absolute select-none hidden md:block"
           style={{
             left: 0,
             top: 80,
@@ -523,7 +526,7 @@ export default function Home() {
         />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <div className="text-center mb-20 reveal">
+          <div className="text-center mb-12 md:mb-20 reveal">
             <Badge>Unsere Leistungen</Badge>
             <h2
               className="mt-6 font-sans font-semibold text-gradient-display tracking-tight"
@@ -540,10 +543,10 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="section-divider mx-16" />
+      <div className="section-divider mx-4 md:mx-16" />
 
       {/* ── PAIN POINTS ── */}
-      <section className="py-28 px-6 relative overflow-hidden">
+      <section className="py-16 md:py-28 px-4 md:px-6 relative overflow-hidden">
         {/* Amber ambient glow — center */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -565,7 +568,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-3 gap-5 reveal-container">
+          <div className="cards-mobile-stack reveal-container">
             {[
               {
                 q: "Du weißt nicht wo du anfangen sollst?",
@@ -604,7 +607,7 @@ export default function Home() {
 
       {/* ── WHY SOCIAL MEDIA ── */}
       <section
-        className="py-28 px-6 relative overflow-hidden"
+        className="py-16 md:py-28 px-4 md:px-6 relative overflow-hidden"
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255,233,71,0.05) 0%, transparent 70%)",
         }}
@@ -623,7 +626,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-3 gap-5 reveal-container">
+          <div className="cards-mobile-stack reveal-container">
             {[
               {
                 step: "01",
@@ -681,7 +684,7 @@ export default function Home() {
 
 
       {/* ── TESTIMONIALS ── */}
-      <section className="py-28 px-6">
+      <section className="py-16 md:py-28 px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 reveal">
             <Badge>Testimonials</Badge>
@@ -696,7 +699,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-3 gap-5 reveal-container">
+          <div className="cards-mobile-stack reveal-container">
             {[
               {
                 text: "Nordinary studios ist keine gewöhnliche Content-Agentur – sie ist ein Full-Service-Partner, der mitdenkt, vorausschaut und on Location alles möglich macht. 100 % Einsatz, 100 % Qualität.",
@@ -767,7 +770,7 @@ export default function Home() {
 
       <div className="bg-[#080808] relative z-10">
         {/* ── CTA SECTION ── */}
-        <section className="py-24 px-6 relative overflow-hidden">
+        <section className="py-16 md:py-24 px-4 md:px-6 relative overflow-hidden">
           <div
             className="absolute inset-0 pointer-events-none"
           />
@@ -795,7 +798,7 @@ export default function Home() {
               }}
             />
             {/* Content */}
-            <div className="relative z-20 px-16 py-20">
+            <div className="relative z-20 px-6 py-12 md:px-16 md:py-20">
               <div className="reveal"><Badge>Schreib' uns noch heute!</Badge></div>
               <h2
                 className="mt-6 font-sans font-semibold text-gradient-display tracking-tight reveal"

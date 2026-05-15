@@ -93,7 +93,7 @@ export function HeroSection() {
       </div>
 
       {/* main content */}
-      <div ref={contentRef} className="relative flex flex-col items-center justify-center gap-5 pt-52 pb-48">
+      <div ref={contentRef} className="relative flex flex-col items-center justify-center gap-5 pt-32 pb-24 px-4 md:pt-52 md:pb-48 md:px-0">
         {/* X Content Faded Borders */}
         <div
           aria-hidden="true"
@@ -122,7 +122,7 @@ export function HeroSection() {
         <h1
           ref={titleRef}
           className={cn(
-            "text-balance text-center text-5xl tracking-tight md:text-6xl lg:text-7xl font-bold leading-[1.1]",
+            "text-balance text-center text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] px-2",
             "text-shadow-[0_0px_60px_rgba(255,233,71,0.25)]"
           )}
         >

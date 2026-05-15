@@ -61,7 +61,7 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative pt-32 pb-28 px-6 overflow-visible">
+    <section className="relative pt-20 pb-16 md:pt-32 md:pb-28 px-4 md:px-6 overflow-visible">
       {/* Glow behind the shape */}
       <div 
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[300px] pointer-events-none z-0"
@@ -121,7 +121,7 @@ export function FAQSection() {
           {/* Left Side: Header */}
           <div className="space-y-6 reveal">
             <Badge>• How We Work?</Badge>
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
               Frequently <br />
               <span className="text-neutral-400">Asked Questions</span>
             </h2>

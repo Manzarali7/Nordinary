@@ -2,6 +2,7 @@
 
 import { useRef, useState, useCallback } from "react"
 import { cn } from "@/lib/utils"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export interface TiltCardProps {
   /** Maximum tilt angle in degrees */
@@ -32,6 +33,7 @@ export function TiltCard({
   style,
   children,
 }: TiltCardProps) {
+  const isMobile = useIsMobile()
   const cardRef = useRef<HTMLDivElement>(null)
   const [transform, setTransform] = useState(
     `perspective(${perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`
@@ -43,6 +45,7 @@ export function TiltCard({
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent) => {
+      if (isMobile) return
       const el = cardRef.current
       if (!el) return
       const rect = el.getBoundingClientRect()
@@ -57,7 +60,7 @@ export function TiltCard({
         setSpotlightPos({ x: px * 100, y: py * 100 })
       }
     },
-    [tiltLimit, scale, perspective, dir, spotlight]
+    [isMobile, tiltLimit, scale, perspective, dir, spotlight]
   )
 
   const handlePointerEnter = useCallback(() => {
